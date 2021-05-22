@@ -1,6 +1,6 @@
 # Out of Our Minds
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/bdukes/out-of-our-minds)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2045eb8d-20a7-4a1f-bde9-397868951dca/deploy-status)](https://app.netlify.com/sites/practical-colden-4953c3/deploys)
 
 ## Setup Instructions
 
