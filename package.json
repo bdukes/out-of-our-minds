@@ -1,10 +1,10 @@
 {
-  "name": "elm-pages-example",
+  "name": "out-of-our-minds",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.1.0",
   "scripts": {
     "start": "elm-pages develop",
-    "serve": "npm run build && http-server ./dist -a localhost -p 3000 -c-1",
+    "serve": "yarn run build && http-server ./dist -a localhost -p 3000 -c-1",
     "build": "elm-pages build",
     "postinstall": "elm-tooling install"
   },

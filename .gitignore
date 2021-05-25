@@ -2,5 +2,8 @@ node_modules/
 elm-stuff/
 dist/
 .cache/
-gen/
-
+gen/.pnp.js
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
