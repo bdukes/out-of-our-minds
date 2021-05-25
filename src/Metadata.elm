@@ -13,6 +13,7 @@ type Metadata
     | Article ArticleMetadata
     | Author Data.Author.Author
     | BlogIndex
+    | StoreIndex
 
 
 type alias ArticleMetadata =
@@ -41,6 +42,9 @@ decoder =
 
                     "blog-index" ->
                         Decode.succeed BlogIndex
+
+                    "store-index" ->
+                        Decode.succeed StoreIndex
 
                     "author" ->
                         Decode.map3 Data.Author.Author

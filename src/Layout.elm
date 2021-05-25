@@ -40,7 +40,7 @@ view document page =
             |> Element.layout
                 [ Element.width Element.fill
                 , Font.size 20
-                , Font.family [ Font.typeface "Roboto" ]
+                , Font.family [ Font.typeface "Open Sans" ]
                 , Font.color (Element.rgba255 0 0 0 0.8)
                 ]
     }
@@ -55,8 +55,8 @@ header currentPath =
             , Element.Background.gradient
                 { angle = 0.2
                 , steps =
-                    [ Element.rgb255 0 242 96
-                    , Element.rgb255 5 117 230
+                    [ Palette.color.secondaryDark
+                    , Palette.color.secondaryLight
                     ]
                 }
             ]
@@ -67,18 +67,19 @@ header currentPath =
             , Element.width Element.fill
             , Element.Region.navigation
             , Element.Border.widthEach { bottom = 1, left = 0, right = 0, top = 0 }
-            , Element.Border.color (Element.rgba255 40 80 40 0.4)
+            , Element.Border.color Palette.color.accent
             ]
             [ Element.link []
                 { url = "/"
                 , label =
                     Element.row [ Font.size 30, Element.spacing 16 ]
-                        [ DocumentSvg.view
+                        [ Element.image [] { src = ImagePath.toString Pages.images.logoMain, description = "Out of Our Minds logo" }
                         , Element.text "Out of Our Minds"
                         ]
                 }
             , Element.row [ Element.spacing 15 ]
-                [ highlightableLink currentPath Pages.pages.blog.directory "Blog"
+                [ highlightableLink currentPath Pages.pages.articles.directory "Articles"
+                , highlightableLink currentPath Pages.pages.store.directory "Store"
                 ]
             ]
         ]

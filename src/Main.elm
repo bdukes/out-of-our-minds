@@ -191,7 +191,14 @@ pageView model siteMetadata page viewForPage =
             }
 
         Metadata.BlogIndex ->
-            { title = "elm-pages blog"
+            { title = "Articles | Out of Our Minds"
+            , body =
+                [ Element.column [ Element.padding 20, Element.centerX ] [ Index.view siteMetadata ]
+                ]
+            }
+
+        Metadata.StoreIndex ->
+            { title = "Store | Out of Our Minds"
             , body =
                 [ Element.column [ Element.padding 20, Element.centerX ] [ Index.view siteMetadata ]
                 ]
@@ -304,7 +311,23 @@ head metadata =
                             }
                         , description = siteTagline
                         , locale = Nothing
-                        , title = "elm-pages blog"
+                        , title = "Articles | Out of Our Minds"
+                        }
+                        |> Seo.website
+
+                Metadata.StoreIndex ->
+                    Seo.summaryLarge
+                        { canonicalUrlOverride = Nothing
+                        , siteName = "Out of Our Minds"
+                        , image =
+                            { url = images.logoMain
+                            , alt = "Out of Our Minds logo"
+                            , dimensions = Nothing
+                            , mimeType = Nothing
+                            }
+                        , description = siteTagline
+                        , locale = Nothing
+                        , title = "Store | Out of Our Minds"
                         }
                         |> Seo.website
            )

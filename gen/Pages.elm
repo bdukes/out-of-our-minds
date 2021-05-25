@@ -64,20 +64,25 @@ internals =
 
 allPages : List (PagePath PathKey)
 allPages =
-    [ (buildPage [ "blog", "draft" ])
-    , (buildPage [ "blog", "hello" ])
-    , (buildPage [ "blog" ])
+    [ (buildPage [ "articles", "draft" ])
+    , (buildPage [ "articles", "hello" ])
+    , (buildPage [ "articles" ])
     , (buildPage [  ])
+    , (buildPage [ "store" ])
     ]
 
 pages =
-    { blog =
-        { draft = (buildPage [ "blog", "draft" ])
-        , hello = (buildPage [ "blog", "hello" ])
-        , index = (buildPage [ "blog" ])
-        , directory = directoryWithIndex ["blog"]
+    { articles =
+        { draft = (buildPage [ "articles", "draft" ])
+        , hello = (buildPage [ "articles", "hello" ])
+        , index = (buildPage [ "articles" ])
+        , directory = directoryWithIndex ["articles"]
         }
     , index = (buildPage [  ])
+    , store =
+        { index = (buildPage [ "store" ])
+        , directory = directoryWithIndex ["store"]
+        }
     , directory = directoryWithIndex []
     }
 
@@ -143,25 +148,31 @@ content : List ( List String, { extension: String, frontMatter : String, body : 
 content =
     [ 
   ( []
-    , { frontMatter = "{\"title\":\"elm-pages-starter - a simple blog starter\",\"type\":\"page\"}"
+    , { frontMatter = "{\"title\":\"Out of Our Minds\",\"type\":\"page\"}"
     , body = Nothing
     , extension = "md"
     } )
   ,
-  ( ["blog", "draft"]
+  ( ["articles", "draft"]
     , { frontMatter = "{\"type\":\"blog\",\"author\":\"Nikki Dukes\",\"title\":\"A Draft Blog Post\",\"description\":\"I'm not quite ready to share this post with the world\",\"image\":\"images/article-covers/wall.jpg\",\"draft\":true,\"published\":\"2019-09-21\"}"
     , body = Nothing
     , extension = "md"
     } )
   ,
-  ( ["blog", "hello"]
+  ( ["articles", "hello"]
     , { frontMatter = "{\"type\":\"blog\",\"author\":\"Nikki Dukes\",\"title\":\"Hello `elm-pages`! 🚀\",\"description\":\"Here's an intro for my blog post to get you interested in reading more...\",\"image\":\"images/article-covers/wall.jpg\",\"published\":\"2019-09-21\"}"
     , body = Nothing
     , extension = "md"
     } )
   ,
-  ( ["blog"]
+  ( ["articles"]
     , { frontMatter = "{\"title\":\"Articles | Out of Our Minds\",\"type\":\"blog-index\"}"
+    , body = Nothing
+    , extension = "md"
+    } )
+  ,
+  ( ["store"]
+    , { frontMatter = "{\"title\":\"Store | Out of Our Minds\",\"type\":\"store-index\"}"
     , body = Nothing
     , extension = "md"
     } )
