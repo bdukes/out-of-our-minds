@@ -32,13 +32,13 @@ manifest =
     , categories = [ Pages.Manifest.Category.education ]
     , displayMode = Manifest.Standalone
     , orientation = Manifest.Portrait
-    , description = "elm-pages-starter - A statically typed site generator."
+    , description = siteTagline
     , iarcRatingId = Nothing
-    , name = "elm-pages-starter"
+    , name = "Out of Our Minds"
     , themeColor = Just Color.white
     , startUrl = pages.index
-    , shortName = Just "elm-pages-starter"
-    , sourceIcon = images.iconPng
+    , shortName = Just "Out of Our Minds"
+    , sourceIcon = images.logoMain
     , icons = []
     }
 
@@ -78,7 +78,8 @@ generateFiles :
     ->
         StaticHttp.Request
             (List
-                (Result String
+                (Result
+                    String
                     { path : List String
                     , content : String
                     }
@@ -130,7 +131,10 @@ update msg model =
             ( model, Cmd.none )
 
 
+
 --subscriptions : Model -> Sub Msg
+
+
 subscriptions _ _ _ =
     Sub.none
 
@@ -218,10 +222,10 @@ head metadata =
                 Metadata.Page meta ->
                     Seo.summaryLarge
                         { canonicalUrlOverride = Nothing
-                        , siteName = "elm-pages-starter"
+                        , siteName = "Out of Our Minds"
                         , image =
-                            { url = images.iconPng
-                            , alt = "elm-pages logo"
+                            { url = images.logoMain
+                            , alt = "Out of Our Minds logo"
                             , dimensions = Nothing
                             , mimeType = Nothing
                             }
@@ -234,7 +238,7 @@ head metadata =
                 Metadata.Article meta ->
                     Seo.summaryLarge
                         { canonicalUrlOverride = Nothing
-                        , siteName = "elm-pages starter"
+                        , siteName = "Out of Our Minds"
                         , image =
                             { url = meta.image
                             , alt = meta.description
@@ -271,7 +275,7 @@ head metadata =
                     in
                     Seo.summary
                         { canonicalUrlOverride = Nothing
-                        , siteName = "elm-pages-starter"
+                        , siteName = "Out of Our Minds"
                         , image =
                             { url = meta.avatar
                             , alt = meta.name ++ "'s elm-pages articles."
@@ -291,10 +295,10 @@ head metadata =
                 Metadata.BlogIndex ->
                     Seo.summaryLarge
                         { canonicalUrlOverride = Nothing
-                        , siteName = "elm-pages"
+                        , siteName = "Out of Our Minds"
                         , image =
-                            { url = images.iconPng
-                            , alt = "elm-pages logo"
+                            { url = images.logoMain
+                            , alt = "Out of Our Minds logo"
                             , dimensions = Nothing
                             , mimeType = Nothing
                             }
@@ -308,9 +312,9 @@ head metadata =
 
 canonicalSiteUrl : String
 canonicalSiteUrl =
-    "https://elm-pages-starter.netlify.com"
+    "https://practical-colden-4953c3.netlify.app"
 
 
 siteTagline : String
 siteTagline =
-    "Starter blog for elm-pages"
+    "Creative Resources, Bringing Order to Chaos, for Families"
