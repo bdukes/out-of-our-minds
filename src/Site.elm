@@ -15,7 +15,7 @@ config : SiteConfig Data
 config =
     \_ ->
         { data = data
-        , canonicalUrl = "https://elm-pages.com"
+        , canonicalUrl = "https://out-of-our-minds.family"
         , manifest = manifest
         , head = head
         }
@@ -35,8 +35,8 @@ head static =
 manifest : Data -> Manifest.Config
 manifest static =
     Manifest.init
-        { name = "Site Name"
-        , description = "Description"
-        , startUrl = Route.Index {} |> Route.toPath
+        { name = "Out of Our Minds"
+        , description = "Creative resources bringing order to chaos for families"
+        , startUrl = Route.Index |> Route.toPath
         , icons = []
         }

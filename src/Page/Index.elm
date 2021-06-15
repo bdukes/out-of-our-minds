@@ -42,16 +42,16 @@ head :
 head static =
     Seo.summary
         { canonicalUrlOverride = Nothing
-        , siteName = "elm-pages"
+        , siteName = "Out of Our Minds"
         , image =
-            { url = Pages.Url.external "TODO"
-            , alt = "elm-pages logo"
+            { url = Pages.Url.external "/images/logo-main.svg"
+            , alt = "Out of Our Minds logo"
             , dimensions = Nothing
             , mimeType = Nothing
             }
-        , description = "TODO"
+        , description = "Create resources bringing order out of chaos for families"
         , locale = Nothing
-        , title = "TODO title" -- metadata.title -- TODO
+        , title = "Out of Our Minds"
         }
         |> Seo.website
 

@@ -86,10 +86,7 @@ data =
 
 view :
     Data
-    ->
-        { path : Path
-        , frontmatter : route
-        }
+    -> { path : Path, frontmatter : route }
     -> Model
     -> (Msg -> msg)
     -> View msg
