@@ -3,9 +3,12 @@ module Page.Index exposing (Data, Model, Msg, page)
 import DataSource exposing (DataSource)
 import Head
 import Head.Seo as Seo
+import Html.Styled exposing (..)
+import Html.Styled.Attributes exposing (alt, href, src)
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
+import Route exposing (Route)
 import Shared
 import View exposing (View)
 
@@ -66,4 +69,21 @@ view :
     -> StaticPayload Data RouteParams
     -> View Msg
 view maybeUrl sharedModel static =
-    View.placeholder "Index"
+    { title = "Out of Our Minds"
+    , body =
+        [ header []
+            [ link Route.Index [] [ img [ src "/images/logo-main.svg", alt "Out of Our Minds" ] [] ]
+            ]
+        , main_ [] []
+        , footer [] []
+        ]
+    }
+
+
+link : Route -> List (Attribute msg) -> List (Html msg) -> Html msg
+link route attributes children =
+    Route.toLink
+        (\anchorAttrs ->
+            a (List.map Html.Styled.Attributes.fromUnstyled anchorAttrs ++ attributes) children
+        )
+        route
