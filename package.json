@@ -1,5 +1,6 @@
 {
-  "name": "elm-pages-app",
+  "name": "out-of-our-minds",
+  "private": true,
   "scripts": {
     "start": "elm-pages dev",
     "build": "elm-pages build"

@@ -8,7 +8,7 @@ functions/render/elm-pages-cli.js
 gen/
 
 .pnp.js
-*/.yarn/cache/
-*/.yarn/unplugged/
-*/.yarn/build-state.yml
-*/.yarn/install-state.gz
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz

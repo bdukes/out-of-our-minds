@@ -1,4 +1,4 @@
-[submodule "elm-pages-demo/elm-pages"]
-	path = elm-pages-demo/elm-pages
+[submodule "elm-pages"]
+	path = elm-pages
 	url = https://github.com/dillonkearns/elm-pages.git
 	branch = static-files
