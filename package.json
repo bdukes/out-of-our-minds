@@ -6,6 +6,8 @@
     "build": "elm-pages build"
   },
   "devDependencies": {
-    "elm-pages": "file:elm-pages"
-  }
+    "elm-pages": "file:elm-pages",
+    "elm-tooling": "^1.3.0"
+  },
+  "dependencies": {}
 }
