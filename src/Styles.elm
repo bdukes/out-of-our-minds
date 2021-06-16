@@ -16,12 +16,6 @@ primary =
     , hue = 225
     , saturation = 0.663
     }
-primary : PaletteColor
-primary =
-    { name = "blue"
-    , hue = 225
-    , saturation = 0.663
-    }
 
 
 secondary : PaletteColor
