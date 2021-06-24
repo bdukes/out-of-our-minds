@@ -1,16 +1,16 @@
 module Shared exposing (Category, Data, Model, Msg(..), SharedMsg(..), template)
 
 import Browser.Navigation
-import Css exposing (Style, auto, backgroundColor, borderBox, boxSizing, color, fontFamilies, margin2, maxWidth, minHeight, qt, sansSerif, zero)
+import Css exposing (auto, backgroundColor, borderBox, boxSizing, color, fontFamilies, margin2, maxWidth, minHeight, qt, sansSerif, zero)
 import Css.Global exposing (descendants, everything)
 import DataSource
 import Html exposing (Html)
 import Html.Styled exposing (div)
-import Html.Styled.Attributes exposing (css)
 import Pages.Flags
 import Pages.PageUrl exposing (PageUrl)
 import Path exposing (Path)
 import SharedTemplate exposing (SharedTemplate)
+import Styles
 import View exposing (View)
 
 
@@ -122,8 +122,8 @@ bodyStyles =
     Css.Global.global
         [ Css.Global.body
             [ fontFamilies [ qt "Open Sans", .value sansSerif ]
-            , backgroundColor (Css.hsl 0 0 0.9)
-            , color (Css.hsl 0 1 0.1)
+            , backgroundColor Styles.palette.white
+            , color Styles.palette.black
             , margin2 zero auto
             , maxWidth (Css.px 960)
             , minHeight (Css.vh 100)

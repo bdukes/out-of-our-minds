@@ -1,6 +1,6 @@
 module Page.Index exposing (Data, Model, Msg, page)
 
-import Css exposing (alignItems, backgroundColor, block, center, display, displayFlex, flex, height, justifyContent, padding2, pct, spaceAround, textAlign, width, zero)
+import Css exposing (alignItems, backgroundColor, block, center, color, display, displayFlex, flex, height, justifyContent, padding2, pct, spaceAround, textAlign, width, zero)
 import Css.Media as Media exposing (only, screen, withMedia)
 import DataSource exposing (DataSource)
 import Head
@@ -81,9 +81,9 @@ view maybeUrl sharedModel static =
             [ section []
                 [ img [ css [ width (pct 100), padding2 zero (Css.em 2) ], src "/images/tagline.svg", alt "Creative resources bringing order to chaos for families" ] []
                 ]
-            , section [ css [ displayFlex, justifyContent spaceAround, alignItems center, height (Css.em 10) ] ]
-                [ a [ css [ display block, textAlign center, backgroundColor Styles.palette.primary ], href "" ] [ text "Articles" ]
-                , a [ css [ display block, textAlign center, backgroundColor Styles.palette.secondary ], href "" ] [ text "Store" ]
+            , section [ css [ displayFlex, justifyContent spaceAround, alignItems center ] ]
+                [ a [ css [ display block, textAlign center, padding2 (Css.em 5) zero, width (pct 100), backgroundColor Styles.palette.primary, color Styles.palette.white ], href "" ] [ text "Articles" ]
+                , a [ css [ display block, textAlign center, padding2 (Css.em 5) zero, width (pct 100), backgroundColor Styles.palette.secondary, color Styles.palette.white ], href "" ] [ text "Store" ]
                 ]
             , section [ css [ logoNavStyles ] ] (List.map viewCategoryLink static.sharedData.categories)
             ]
