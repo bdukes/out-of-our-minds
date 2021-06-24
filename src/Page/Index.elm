@@ -82,8 +82,8 @@ view maybeUrl sharedModel static =
                 [ img [ css [ width (pct 100), padding2 zero (Css.em 2) ], src "/images/tagline.svg", alt "Creative resources bringing order to chaos for families" ] []
                 ]
             , section [ css [ displayFlex, justifyContent spaceAround, alignItems center ] ]
-                [ a [ css [ display block, textAlign center, padding2 (Css.em 5) zero, width (pct 100), backgroundColor Styles.palette.primary, color Styles.palette.white ], href "" ] [ text "Articles" ]
-                , a [ css [ display block, textAlign center, padding2 (Css.em 5) zero, width (pct 100), backgroundColor Styles.palette.secondary, color Styles.palette.white ], href "" ] [ text "Store" ]
+                [ link Route.Articles [ css [ display block, textAlign center, padding2 (Css.em 5) zero, width (pct 100), backgroundColor Styles.palette.primary, color Styles.palette.white ] ] [ text "Articles" ]
+                , link Route.Store [ css [ display block, textAlign center, padding2 (Css.em 5) zero, width (pct 100), backgroundColor Styles.palette.secondary, color Styles.palette.white ] ] [ text "Store" ]
                 ]
             , section [ css [ logoNavStyles ] ] (List.map viewCategoryLink static.sharedData.categories)
             ]
