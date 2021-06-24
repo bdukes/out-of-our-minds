@@ -4,6 +4,7 @@ import Browser.Navigation
 import Css exposing (auto, backgroundColor, borderBox, boxSizing, color, fontFamilies, margin2, maxWidth, minHeight, qt, sansSerif, zero)
 import Css.Global exposing (descendants, everything)
 import DataSource
+import DataSource.Glob
 import Html exposing (Html)
 import Html.Styled exposing (div)
 import Pages.Flags
@@ -92,16 +93,17 @@ subscriptions _ _ =
 
 data : DataSource.DataSource Data
 data =
-    DataSource.succeed
-        { categories =
-            [ { name = "Trauam", icon = "/images/trauma.svg" }
-            , { name = "Sensory", icon = "/images/sensory.svg" }
-            , { name = "Nurture", icon = "/images/nurture.svg" }
-            , { name = "Education", icon = "/images/education.svg" }
-            , { name = "Order", icon = "/images/order.svg" }
-            , { name = "Nutrition", icon = "/images/nutrition.svg" }
-            ]
-        }
+    let
+        toCategory prefix imageName suffix =
+            { name = imageName, icon = prefix ++ imageName ++ suffix }
+    in
+    DataSource.Glob.succeed toCategory
+        |> DataSource.Glob.match (DataSource.Glob.literal "public")
+        |> DataSource.Glob.capture (DataSource.Glob.literal "/images/categories/")
+        |> DataSource.Glob.capture DataSource.Glob.wildcard
+        |> DataSource.Glob.capture (DataSource.Glob.literal ".svg")
+        |> DataSource.Glob.toDataSource
+        |> DataSource.map Data
 
 
 view :
