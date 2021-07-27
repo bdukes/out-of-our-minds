@@ -1,4 +1,4 @@
-module Page.Store exposing (Model, Msg, Data, page)
+module Page.Store exposing (Data, Model, Msg, page)
 
 import DataSource exposing (DataSource)
 import Head
@@ -17,12 +17,14 @@ type alias Model =
 type alias Msg =
     Never
 
+
 type alias RouteParams =
     {}
 
+
 page : Page RouteParams Data
 page =
-    Page.singleRoute
+    Page.single
         { head = head
         , data = data
         }
@@ -32,7 +34,6 @@ page =
 data : DataSource Data
 data =
     DataSource.succeed ()
-
 
 
 head :
