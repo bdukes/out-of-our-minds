@@ -1,11 +1,11 @@
 module Page.Index exposing (Data, Model, Msg, page)
 
+import Accessibility.Styled exposing (..)
 import Css exposing (alignItems, backgroundColor, block, center, color, display, displayFlex, flex, height, justifyContent, padding2, pct, spaceAround, textAlign, width, zero)
 import Css.Media as Media exposing (only, screen, withMedia)
 import DataSource exposing (DataSource)
 import Head
 import Head.Seo as Seo
-import Html.Styled exposing (..)
 import Html.Styled.Attributes exposing (alt, css, href, src)
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
@@ -75,11 +75,11 @@ view maybeUrl sharedModel static =
     { title = "Out of Our Minds"
     , body =
         [ header []
-            [ link Route.Index [] [ img [ src "/images/logo-main.svg", alt "Out of Our Minds" ] [] ]
+            [ link Route.Index [] [ img "Out of Our Minds" [ src "/images/logo-main.svg" ] ]
             ]
         , main_ []
             [ section []
-                [ img [ css [ width (pct 100), padding2 zero (Css.em 2) ], src "/images/tagline.svg", alt "Creative resources bringing order to chaos for families" ] []
+                [ img "Creative resources bringing order to chaos for families" [ css [ width (pct 100), padding2 zero (Css.em 2) ], src "/images/tagline.svg" ]
                 ]
             , section [ css [ displayFlex, justifyContent spaceAround, alignItems center ] ]
                 [ link Route.Articles [ css [ display block, textAlign center, padding2 (Css.em 5) zero, width (pct 100), backgroundColor Styles.palette.primary, color Styles.palette.white ] ] [ text "Articles" ]
@@ -94,7 +94,7 @@ view maybeUrl sharedModel static =
 
 viewCategoryLink : Shared.Category -> Html msg
 viewCategoryLink category =
-    a [ css [ textAlign center ], href "" ] [ img [ src category.icon, alt category.name ] [] ]
+    a [ css [ textAlign center ], href "" ] [ img category.name [ src category.icon ] ]
 
 
 logoNavStyles : Css.Style
@@ -115,7 +115,7 @@ logoNavStyles =
         ]
 
 
-link : Route -> List (Attribute msg) -> List (Html msg) -> Html msg
+link : Route -> List (Attribute Never) -> List (Html msg) -> Html msg
 link route attributes children =
     Route.toLink
         (\anchorAttrs ->

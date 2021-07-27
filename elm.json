@@ -24,6 +24,7 @@
             "miniBill/elm-codec": "1.2.0",
             "noahzgordon/elm-color-extra": "1.0.2",
             "rtfeldman/elm-css": "16.1.1",
+            "tesk9/accessible-html-with-css": "2.2.0",
             "tripokey/elm-fuzzy": "5.2.1",
             "zwilias/json-decode-exploration": "6.0.0"
         },

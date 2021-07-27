@@ -1,12 +1,12 @@
 module Shared exposing (Category, Data, Model, Msg(..), SharedMsg(..), template)
 
+import Accessibility.Styled exposing (div)
 import Browser.Navigation
 import Css exposing (auto, backgroundColor, borderBox, boxSizing, color, fontFamilies, margin2, maxWidth, minHeight, qt, sansSerif, zero)
 import Css.Global exposing (descendants, everything)
 import DataSource
 import DataSource.Glob
 import Html exposing (Html)
-import Html.Styled exposing (div)
 import Pages.Flags
 import Pages.PageUrl exposing (PageUrl)
 import Path exposing (Path)
@@ -115,11 +115,11 @@ view :
     -> { body : Html msg, title : String }
 view sharedData page model toMsg pageView =
     { title = pageView.title
-    , body = div [] (bodyStyles :: pageView.body) |> Html.Styled.toUnstyled
+    , body = div [] (bodyStyles :: pageView.body) |> Accessibility.Styled.toUnstyled
     }
 
 
-bodyStyles : Html.Styled.Html msg
+bodyStyles : Accessibility.Styled.Html msg
 bodyStyles =
     Css.Global.global
         [ Css.Global.body
