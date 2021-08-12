@@ -1,8 +1,11 @@
+/** @typedef {{load: (Promise<unknown>); flags: (unknown)}} ElmPagesInit */
+
+/** @type ElmPagesInit */
 export default {
-  load: function (elmLoaded) {
-    document.addEventListener("DOMContentLoaded", function (event) {});
+  load: async function (elmLoaded) {
+    const app = await elmLoaded;
   },
   flags: function () {
-    return null;
+    return "You can decode this in Shared.elm using Json.Decode.string!";
   },
 };

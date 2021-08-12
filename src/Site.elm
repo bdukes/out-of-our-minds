@@ -13,7 +13,6 @@ type alias Data =
 
 config : SiteConfig Data
 config =
-    \_ ->
         { data = data
         , canonicalUrl = "https://out-of-our-minds.family"
         , manifest = manifest
