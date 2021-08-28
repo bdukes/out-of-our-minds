@@ -14,6 +14,7 @@ import Shared
 import Site
 import Styles
 import View exposing (View)
+import View.Common exposing (link)
 
 
 type alias Model =
@@ -108,12 +109,3 @@ logoNavStyles =
             [ Css.property "grid-template-columns" "repeat(6, 1fr)"
             ]
         ]
-
-
-link : Route -> List (Attribute Never) -> List (Html msg) -> Html msg
-link route attributes children =
-    Route.toLink
-        (\anchorAttrs ->
-            a (List.map Html.Styled.Attributes.fromUnstyled anchorAttrs ++ attributes) children
-        )
-        route
