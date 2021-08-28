@@ -12,6 +12,7 @@ import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
 import Route exposing (Route)
 import Shared
+import Site
 import Styles
 import View exposing (View)
 
@@ -48,14 +49,9 @@ head :
 head static =
     Seo.summary
         { canonicalUrlOverride = Nothing
-        , siteName = "Out of Our Minds"
-        , image =
-            { url = Pages.Url.external "/images/logo-main.svg"
-            , alt = "Out of Our Minds logo"
-            , dimensions = Nothing
-            , mimeType = Nothing
-            }
-        , description = "Create resources bringing order out of chaos for families"
+        , siteName = Site.siteName
+        , image = Site.siteLogo
+        , description = Site.siteTagline
         , locale = Nothing
         , title = "Out of Our Minds"
         }

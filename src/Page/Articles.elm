@@ -7,6 +7,7 @@ import Page exposing (Page, PageWithState, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
 import Shared
+import Site
 import View exposing (View)
 
 
@@ -42,16 +43,11 @@ head :
 head static =
     Seo.summary
         { canonicalUrlOverride = Nothing
-        , siteName = "elm-pages"
-        , image =
-            { url = Pages.Url.external "TODO"
-            , alt = "elm-pages logo"
-            , dimensions = Nothing
-            , mimeType = Nothing
-            }
+        , siteName = Site.siteName
+        , image = Site.siteLogo -- TODO: specific image?
         , description = "TODO"
         , locale = Nothing
-        , title = "TODO title" -- metadata.title -- TODO
+        , title = "Articles | Out of Our Minds"
         }
         |> Seo.website
 
