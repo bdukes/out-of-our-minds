@@ -1,13 +1,17 @@
 module Page.Articles exposing (Data, Model, Msg, page)
 
+import Accessibility.Styled exposing (..)
+import Article exposing (ArticleMetadata)
 import DataSource exposing (DataSource)
 import Head
 import Head.Seo as Seo
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
+import Route exposing (Route)
 import Shared
 import Site
 import View exposing (View)
+import View.Common
 
 
 type alias Model =
@@ -33,7 +37,7 @@ page =
 
 data : DataSource Data
 data =
-    DataSource.succeed ()
+    Article.allMetadata
 
 
 head :
@@ -52,7 +56,7 @@ head _ =
 
 
 type alias Data =
-    ()
+    List ( Route, Article.ArticleMetadata )
 
 
 view :
@@ -60,5 +64,18 @@ view :
     -> Shared.Model
     -> StaticPayload Data RouteParams
     -> View Msg
-view _ _ _ =
-    View.placeholder "Articles"
+view _ _ static =
+    { title = "Articles | Out of Our Minds"
+    , body =
+        View.Common.body
+            [ h2 [] [ text "All articles" ]
+            , ul [] (List.map viewArticle static.data)
+            ]
+    }
+
+
+viewArticle : ( Route, ArticleMetadata ) -> Html msg
+viewArticle ( route, metadata ) =
+    li []
+        [ View.Common.link route [] [ text metadata.title ]
+        ]
