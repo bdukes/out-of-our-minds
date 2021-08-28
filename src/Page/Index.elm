@@ -1,15 +1,14 @@
 module Page.Index exposing (Data, Model, Msg, page)
 
 import Accessibility.Styled exposing (..)
-import Css exposing (alignItems, backgroundColor, block, center, color, display, displayFlex, flex, height, justifyContent, padding2, pct, spaceAround, textAlign, width, zero)
+import Css exposing (alignItems, backgroundColor, block, center, color, display, displayFlex, justifyContent, padding2, pct, spaceAround, textAlign, width, zero)
 import Css.Media as Media exposing (only, screen, withMedia)
 import DataSource exposing (DataSource)
 import Head
 import Head.Seo as Seo
-import Html.Styled.Attributes exposing (alt, css, href, src)
+import Html.Styled.Attributes exposing (css, href, src)
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
-import Pages.Url
 import Route exposing (Route)
 import Shared
 import Site
@@ -46,7 +45,7 @@ data =
 head :
     StaticPayload Data RouteParams
     -> List Head.Tag
-head static =
+head _ =
     Seo.summary
         { canonicalUrlOverride = Nothing
         , siteName = Site.siteName
@@ -67,7 +66,7 @@ view :
     -> Shared.Model
     -> StaticPayload Data RouteParams
     -> View Msg
-view maybeUrl sharedModel static =
+view _ _ static =
     { title = "Out of Our Minds"
     , body =
         [ header []

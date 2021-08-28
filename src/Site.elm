@@ -28,13 +28,13 @@ data =
 
 
 head : Data -> List Head.Tag
-head static =
+head _ =
     [ Head.sitemapLink "/sitemap.xml"
     ]
 
 
 manifest : Data -> Manifest.Config
-manifest static =
+manifest _ =
     Manifest.init
         { name = siteName
         , description = siteTagline

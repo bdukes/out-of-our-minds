@@ -1,4 +1,4 @@
-module Shared exposing (Category, Data, Model, Msg(..), SharedMsg(..), template)
+module Shared exposing (Category, Data, Model, Msg, SharedMsg, template)
 
 import Accessibility.Styled exposing (div)
 import Browser.Navigation
@@ -23,17 +23,12 @@ template =
     , view = view
     , data = data
     , subscriptions = subscriptions
-    , onPageChange = Just OnPageChange
+    , onPageChange = Nothing
     }
 
 
-type Msg
-    = OnPageChange
-        { path : Path
-        , query : Maybe String
-        , fragment : Maybe String
-        }
-    | SharedMsg SharedMsg
+type alias Msg =
+    Never
 
 
 type alias Category =
@@ -47,8 +42,8 @@ type alias Data =
     }
 
 
-type SharedMsg
-    = NoOp
+type alias SharedMsg =
+    Never
 
 
 type alias Model =
@@ -70,7 +65,7 @@ init :
             , pageUrl : Maybe PageUrl
             }
     -> ( Model, Cmd Msg )
-init navigationKey flags maybePagePath =
+init _ _ _ =
     ( { showMobileMenu = False }
     , Cmd.none
     )
@@ -78,12 +73,7 @@ init navigationKey flags maybePagePath =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case msg of
-        OnPageChange _ ->
-            ( { model | showMobileMenu = False }, Cmd.none )
-
-        SharedMsg globalMsg ->
-            ( model, Cmd.none )
+    ( { model | showMobileMenu = False }, Cmd.none )
 
 
 subscriptions : Path -> Model -> Sub Msg
@@ -116,7 +106,7 @@ view :
     -> (Msg -> msg)
     -> View msg
     -> { body : Html msg, title : String }
-view sharedData page model toMsg pageView =
+view _ _ _ _ pageView =
     { title = pageView.title
     , body = div [] (bodyStyles :: pageView.body) |> Accessibility.Styled.toUnstyled
     }

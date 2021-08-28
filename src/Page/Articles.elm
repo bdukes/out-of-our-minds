@@ -3,9 +3,8 @@ module Page.Articles exposing (Data, Model, Msg, page)
 import DataSource exposing (DataSource)
 import Head
 import Head.Seo as Seo
-import Page exposing (Page, PageWithState, StaticPayload)
+import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
-import Pages.Url
 import Shared
 import Site
 import View exposing (View)
@@ -40,12 +39,12 @@ data =
 head :
     StaticPayload Data RouteParams
     -> List Head.Tag
-head static =
+head _ =
     Seo.summary
         { canonicalUrlOverride = Nothing
         , siteName = Site.siteName
-        , image = Site.siteLogo -- TODO: specific image?
-        , description = "TODO"
+        , image = Site.siteLogo
+        , description = "Our collection of articles on topics like education, nurture, sensory needs, trauma and more"
         , locale = Nothing
         , title = "Articles | Out of Our Minds"
         }
@@ -61,5 +60,5 @@ view :
     -> Shared.Model
     -> StaticPayload Data RouteParams
     -> View Msg
-view maybeUrl sharedModel static =
+view _ _ _ =
     View.placeholder "Articles"
