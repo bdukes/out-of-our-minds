@@ -30,6 +30,7 @@ data =
 head : Data -> List Head.Tag
 head _ =
     [ Head.sitemapLink "/sitemap.xml"
+    , Head.rssLink "/articles/feed.xml"
     ]
 
 
