@@ -118,11 +118,6 @@ view :
 view _ _ static =
     { title = static.data.metadata.title
     , body =
-        [ header []
-            [ link Route.Index [] [ img "Out of Our Minds" [ src "/images/logo-main.svg" ] ]
-            ]
-        , main_ []
+        View.Common.body
             ([ h2 [] [ text static.data.metadata.title ] ] ++ static.data.body)
-        , footer [] []
-        ]
     }

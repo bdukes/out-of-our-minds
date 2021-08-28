@@ -1,6 +1,7 @@
 module View exposing (View, map, placeholder)
 
 import Accessibility.Styled exposing (Html, text)
+import View.Common
 
 
 type alias View msg =
@@ -19,5 +20,5 @@ map fn doc =
 placeholder : String -> View msg
 placeholder moduleName =
     { title = "Placeholder - " ++ moduleName
-    , body = [ text moduleName ]
+    , body = View.Common.body [ text moduleName ]
     }

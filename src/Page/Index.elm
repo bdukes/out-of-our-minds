@@ -70,10 +70,7 @@ view :
 view _ _ static =
     { title = "Out of Our Minds"
     , body =
-        [ header []
-            [ link Route.Index [] [ img "Out of Our Minds" [ src "/images/logo-main.svg" ] ]
-            ]
-        , main_ []
+        View.Common.body
             [ section []
                 [ img "Creative resources bringing order to chaos for families" [ css [ width (pct 100), padding2 zero (Css.em 2) ], src "/images/tagline.svg" ]
                 ]
@@ -83,8 +80,6 @@ view _ _ static =
                 ]
             , section [ css [ logoNavStyles ] ] (List.map viewCategoryLink static.sharedData.categories)
             ]
-        , footer [] []
-        ]
     }
 
 
