@@ -5,9 +5,11 @@ import DataSource
 import DataSource.File as File
 import DataSource.Glob as Glob
 import Date exposing (Date)
+import List.Extra
 import OptimizedDecoder
 import Pages.Url exposing (Url)
 import Route
+import Shared exposing (Category)
 
 
 type alias Article =
@@ -29,16 +31,17 @@ articlesGlob =
 allMetadata : DataSource.DataSource (List ( Route.Route, ArticleMetadata ))
 allMetadata =
     articlesGlob
-        |> DataSource.map
-            (\paths ->
+        |> DataSource.map2
+            (\categories paths ->
                 paths
                     |> List.map
                         (\{ filePath, slug } ->
                             DataSource.map2 Tuple.pair
                                 (DataSource.succeed <| Route.Article__Slug_ { slug = slug })
-                                (File.onlyFrontmatter frontmatterDecoder filePath)
+                                (File.onlyFrontmatter (frontmatterDecoder categories) filePath)
                         )
             )
+            Shared.categoryDataSource
         |> DataSource.resolve
         |> DataSource.map
             (\articles ->
@@ -65,36 +68,55 @@ type alias ArticleMetadata =
     , published : Date
     , image : Url
     , draft : Bool
+    , categories : List Category
     }
 
 
-frontmatterDecoder : OptimizedDecoder.Decoder ArticleMetadata
-frontmatterDecoder =
-    OptimizedDecoder.map6 ArticleMetadata
+frontmatterDecoder : List Category -> OptimizedDecoder.Decoder ArticleMetadata
+frontmatterDecoder categories =
+    OptimizedDecoder.map7 ArticleMetadata
         (OptimizedDecoder.field "title" OptimizedDecoder.string)
         (OptimizedDecoder.field "description" OptimizedDecoder.string)
         (OptimizedDecoder.field "author" OptimizedDecoder.string)
-        (OptimizedDecoder.field "published"
-            (OptimizedDecoder.string
-                |> OptimizedDecoder.andThen
-                    (\isoString ->
-                        case Date.fromIsoString isoString of
-                            Ok date ->
-                                OptimizedDecoder.succeed date
-
-                            Err error ->
-                                OptimizedDecoder.fail error
-                    )
-            )
-        )
+        (OptimizedDecoder.field "published" dateDecoder)
         (OptimizedDecoder.field "image" imageDecoder)
         (OptimizedDecoder.field "draft" OptimizedDecoder.bool
             |> OptimizedDecoder.maybe
             |> OptimizedDecoder.map (Maybe.withDefault False)
         )
+        (OptimizedDecoder.field "categories" (OptimizedDecoder.list (categoryDecoder categories)))
+
+
+categoryDecoder : List Category -> OptimizedDecoder.Decoder Category
+categoryDecoder categories =
+    let
+        toCategory categoryName =
+            case List.Extra.find (\{ name } -> String.toUpper name == String.toUpper categoryName) categories of
+                Nothing ->
+                    OptimizedDecoder.fail ("Could not find category " ++ categoryName)
+
+                Just category ->
+                    OptimizedDecoder.succeed category
+    in
+    OptimizedDecoder.string
+        |> OptimizedDecoder.andThen toCategory
 
 
 imageDecoder : OptimizedDecoder.Decoder Url
 imageDecoder =
     OptimizedDecoder.string
         |> OptimizedDecoder.map (\cloudinaryAsset -> Cloudinary.url cloudinaryAsset Nothing 800)
+
+
+dateDecoder : OptimizedDecoder.Decoder Date
+dateDecoder =
+    OptimizedDecoder.string
+        |> OptimizedDecoder.andThen
+            (\isoString ->
+                case Date.fromIsoString isoString of
+                    Ok date ->
+                        OptimizedDecoder.succeed date
+
+                    Err error ->
+                        OptimizedDecoder.fail error
+            )

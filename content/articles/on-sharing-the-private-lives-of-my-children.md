@@ -5,6 +5,7 @@
   "description": "",
   "image": "v1603304397/article-covers/on-sharing-the-private-lives-of-my-children",
   "published": "2021-08-28",
+  "categories": ["nurture", "trauma"]
 }
 ---
 

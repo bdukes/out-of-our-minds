@@ -1,13 +1,16 @@
 module MarkdownCodec exposing (isPlaceholder, noteTitle, titleAndDescription, withFrontmatter, withoutFrontmatter)
 
+import Article exposing (Article, ArticleMetadata, frontmatterDecoder)
 import DataSource exposing (DataSource)
 import DataSource.File as StaticFile
+import Html exposing (Html)
 import List.Extra
 import Markdown.Block as Block exposing (Block)
 import Markdown.Parser
 import Markdown.Renderer
 import OptimizedDecoder exposing (Decoder)
 import Serialize as S
+import Shared
 
 
 isPlaceholder : String -> DataSource (Maybe ())
@@ -190,17 +193,22 @@ withoutFrontmatter renderer filePath =
 
 
 withFrontmatter :
-    (frontmatter -> List view -> value)
-    -> Decoder frontmatter
-    -> Markdown.Renderer.Renderer view
+    (ArticleMetadata -> List (Html msg) -> value)
     -> String
     -> DataSource value
-withFrontmatter constructor frontmatterDecoder renderer filePath =
+withFrontmatter constructor filePath =
+    let
+        frontmatterDataSource =
+            Shared.categoryDataSource
+                |> DataSource.andThen
+                    (\categories ->
+                        StaticFile.onlyFrontmatter
+                            (frontmatterDecoder categories)
+                            filePath
+                    )
+    in
     DataSource.map2 constructor
-        (StaticFile.onlyFrontmatter
-            frontmatterDecoder
-            filePath
-        )
+        frontmatterDataSource
         ((StaticFile.bodyWithoutFrontmatter
             filePath
             |> DataSource.andThen
@@ -216,7 +224,7 @@ withFrontmatter constructor frontmatterDecoder renderer filePath =
             |> DataSource.andThen
                 (\blocks ->
                     blocks
-                        |> Markdown.Renderer.render renderer
+                        |> Markdown.Renderer.render Markdown.Renderer.defaultHtmlRenderer
                         |> DataSource.fromResult
                 )
         )

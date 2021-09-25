@@ -14,9 +14,10 @@ import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
 import Path
 import Route
-import Shared
+import Shared exposing (Category)
 import Site
 import StructuredData
+import Svg.Styled exposing (metadata)
 import View exposing (View)
 import View.Common exposing (link)
 
@@ -57,8 +58,6 @@ routes =
 data : RouteParams -> DataSource Data
 data route =
     MarkdownCodec.withFrontmatter (\metadata body -> Data metadata (List.map Accessibility.Styled.fromUnstyled body))
-        frontmatterDecoder
-        Markdown.Renderer.defaultHtmlRenderer
         ("content/articles/" ++ route.slug ++ ".md")
 
 
@@ -95,7 +94,7 @@ head static =
                 , title = metadata.title
                 }
                 |> Seo.article
-                    { tags = []
+                    { tags = List.map .name metadata.categories
                     , section = Nothing
                     , publishedTime = Just (Date.toIsoString metadata.published)
                     , modifiedTime = Nothing
@@ -119,5 +118,17 @@ view _ _ static =
     { title = static.data.metadata.title
     , body =
         View.Common.body
-            ([ h2 [] [ text static.data.metadata.title ] ] ++ static.data.body)
+            (viewHeader static.data.metadata ++ static.data.body)
     }
+
+
+viewHeader : ArticleMetadata -> List (Html Msg)
+viewHeader metadata =
+    let
+        viewCategory : Category -> Html Msg
+        viewCategory category =
+            li [] [ img category.name [ src category.icon ] ]
+    in
+    [ h2 [] [ text metadata.title ]
+    , ul [] (List.map viewCategory metadata.categories)
+    ]
