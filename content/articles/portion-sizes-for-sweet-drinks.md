@@ -20,7 +20,7 @@ Reviving a drop in blood sugar is most commonly 15g of carbohydrates for diabeti
 We portion juice in three ways: 
 1. Empty glass spice jars. Not only do they look gosh darn cute, they are just the right size for a good serving of full-strength juice. Note, these are typically exactly 4 oz when filled to the top.
 2. 4 oz juice boxes. They are a little harder to find, but Juicy Juice and Apple and Eve and the sesame street ones are just the right size. 
-3. Mix with water. We might add a splash of juice to water or a splash of water to juice. If the kids are playing hard, the juice helps keep blood sugar from dropping and lets the fun continue a bit longer. Collagen powder<a href="#f1"><sup id="a1">*</sup></a> is often a good mix in with juice and water, too.
+3. Mix with water. We might add a splash of juice to water or a splash of water to juice. If the kids are playing hard, the juice helps keep blood sugar from dropping and lets the fun continue a bit longer. Collagen powder<ooom-footnote-ref id="1" /> is often a good mix in with juice and water, too.
 
 PHOTOS: Spice jars, juice boxes, mini mugs. 
 
@@ -34,4 +34,4 @@ Two of my kids do not like the sensation of carbonation, so we do not even get r
 
 One drank sodas as an infant abroad before he was in our care. He still loves all the bubbly drinks he can get his hands on. We ask friends to give him sparkling water for his birthday or at holidays and he gets his fill.  We also get a mango nectar drink for a birthday gift, which comes in a can and is full of sugar, so it feels like a soda/pop treat- without the bubbles (or disappointment of going flat when he wants it to last two days!)
 
-<b id="f1">*</b> We use collagen to strengthen the nails and hair of our kiddo who experienced a lack of proper nutrients and is still playing catch up. Due to several reasons his nails peel and crack and this has helped a lot! [↩](#a1)
+<ooom-footnote id="1">We use collagen to strengthen the nails and hair of our kiddo who experienced a lack of proper nutrients and is still playing catch up. Due to several reasons his nails peel and crack and this has helped a lot!</ooom-footnote>
