@@ -3,6 +3,7 @@ module Site exposing (config, siteLogo, siteName, siteTagline)
 import DataSource
 import Head
 import Head.Seo exposing (Image)
+import MimeType exposing (MimeType)
 import Pages.Manifest as Manifest
 import Pages.Url
 import Route
@@ -31,6 +32,8 @@ head : Data -> List Head.Tag
 head _ =
     [ Head.sitemapLink "/sitemap.xml"
     , Head.rssLink "/articles/feed.xml"
+    , Head.icon [] (MimeType.OtherImage "svg+xml") (Pages.Url.external "/images/favicon.svg")
+    , Head.icon [ ( 48, 48 ) ] MimeType.Png (Pages.Url.external "/images/favicon.png")
     ]
 
 
