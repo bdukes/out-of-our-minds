@@ -1,3 +1,13 @@
+---
+{
+  "author": "Nikki Dukes",
+  "title": "Portion Sizes for Sweet Drinks",
+  "description": "",
+  "image": "v1603304397/article-covers/portion-sizes-for-sweet-drinks",
+  "published": "2021-09-25",
+  "categories": ["nutrition", "trauma"]
+}
+---
 We limit the amount of sugary drinks our family has. As a diabetic, I learned quickly as a preteen that I could control my body much better, use tremendously less insulin, and prevent insulin resistance by using sweet drinks as a very occasional treat. To limit my own temptations and teach my kids healthy habits regarding sweet drinks, we have developed some habits we find very doable and reasonable. 
 
 Depending on your family’s history with sweet drinks, it may be easier to scale back one step at a time, over time.  
