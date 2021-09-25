@@ -3,11 +3,14 @@ module MarkdownCodec exposing (isPlaceholder, noteTitle, titleAndDescription, wi
 import Article exposing (Article, ArticleMetadata, frontmatterDecoder)
 import DataSource exposing (DataSource)
 import DataSource.File as StaticFile
-import Html exposing (Html)
+import Html.Styled exposing (Html)
+import Html.Styled.Attributes
 import List.Extra
 import Markdown.Block as Block exposing (Block)
+import Markdown.Html
 import Markdown.Parser
 import Markdown.Renderer
+import MarkdownRenderer
 import OptimizedDecoder exposing (Decoder)
 import Serialize as S
 import Shared
@@ -224,7 +227,7 @@ withFrontmatter constructor filePath =
             |> DataSource.andThen
                 (\blocks ->
                     blocks
-                        |> Markdown.Renderer.render Markdown.Renderer.defaultHtmlRenderer
+                        |> Markdown.Renderer.render MarkdownRenderer.renderer
                         |> DataSource.fromResult
                 )
         )

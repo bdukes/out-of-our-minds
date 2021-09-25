@@ -57,7 +57,7 @@ routes =
 
 data : RouteParams -> DataSource Data
 data route =
-    MarkdownCodec.withFrontmatter (\metadata body -> Data metadata (List.map Accessibility.Styled.fromUnstyled body))
+    MarkdownCodec.withFrontmatter (\metadata body -> Data metadata body)
         ("content/articles/" ++ route.slug ++ ".md")
 
 
