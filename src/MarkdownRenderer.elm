@@ -1,5 +1,7 @@
 module MarkdownRenderer exposing (renderer)
 
+import Css
+import Css.Global
 import Html as UnstyledHtml
 import Html.Styled as Html exposing (Html, fromUnstyled, toUnstyled)
 import Html.Styled.Attributes as Attr
@@ -64,6 +66,19 @@ toStyledRenderer unstyledRenderer =
 htmlRenderer : Markdown.Html.Renderer (List (Html msg) -> Html msg)
 htmlRenderer =
     Markdown.Html.oneOf
-        [ Markdown.Html.tag "ooom-footnote-ref" (\id _ -> Html.a [ Attr.href ("#f" ++ id) ] [ Html.sup [ Attr.id ("fr" ++ id) ] [ Html.text id ] ]) |> Markdown.Html.withAttribute "id"
-        , Markdown.Html.tag "ooom-footnote" (\id children -> Html.div [] (Html.sup [ Attr.id ("f" ++ id) ] [ Html.text id ] :: children ++ [ Html.a [ Attr.href ("#fr" ++ id) ] [ Html.text " ↩" ] ])) |> Markdown.Html.withAttribute "id"
+        [ Markdown.Html.tag "ooom-footnote-ref" viewFootnoteRef |> Markdown.Html.withAttribute "id"
+        , Markdown.Html.tag "ooom-footnote" viewFootnote |> Markdown.Html.withAttribute "id"
+        ]
+
+
+viewFootnote : String -> List (Html msg) -> Html msg
+viewFootnote id children =
+    Html.div [ Attr.css [ Css.Global.children [ Css.Global.typeSelector "p" [ Css.display Css.inline ] ] ] ]
+        (Html.sup [ Attr.id ("f" ++ id) ] [ Html.text id ] :: children ++ [ Html.a [ Attr.href ("#fr" ++ id) ] [ Html.text " ↩" ] ])
+
+
+viewFootnoteRef : String -> List (Html msg) -> Html msg
+viewFootnoteRef id _ =
+    Html.a [ Attr.href ("#f" ++ id) ]
+        [ Html.sup [ Attr.id ("fr" ++ id) ] [ Html.text id ]
         ]
