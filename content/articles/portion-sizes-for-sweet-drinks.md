@@ -19,7 +19,7 @@ Reviving a drop in blood sugar is most commonly 15g of carbohydrates for diabeti
 
 We portion juice in three ways: 
 1. Empty glass spice jars. Not only do they look gosh darn cute, they are just the right size for a good serving of full-strength juice. Note, these are typically exactly 4 oz when filled to the top.
-2. 4 oz juice boxes. They are a little harder to find, but Juicy Juice and Apple and Eve and the sesame street ones are just the right size. 
+2. 4 oz juice boxes. They are a little harder to find, but Juicy Juice and Apple and Eve (often with Sesame Street characters on the packaging) are just the right size. 
 3. Mix with water. We might add a splash of juice to water or a splash of water to juice. If the kids are playing hard, the juice helps keep blood sugar from dropping and lets the fun continue a bit longer. Collagen powder<ooom-footnote-ref id="1" /> is often a good mix in with juice and water, too.
 
 ![Three empty glass spice jars on a white counter](/images/articles/portion-sizes-for-sweet-drinks/IMG_20210925_135155068~2.jpg)
