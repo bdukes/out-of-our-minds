@@ -2,6 +2,8 @@ module Page.Article.Slug_ exposing (Data, Model, Msg, page)
 
 import Accessibility.Styled exposing (..)
 import Article exposing (ArticleMetadata, frontmatterDecoder)
+import Css
+import Css.Global
 import DataSource exposing (DataSource)
 import Date
 import Head exposing (structuredData)
@@ -115,20 +117,16 @@ view :
     -> StaticPayload Data RouteParams
     -> View Msg
 view _ _ static =
-    { title = static.data.metadata.title
-    , body =
-        View.Common.body
-            (viewHeader static.data.metadata ++ static.data.body)
-    }
-
-
-viewHeader : ArticleMetadata -> List (Html Msg)
-viewHeader metadata =
     let
         viewCategory : Category -> Html Msg
         viewCategory category =
             li [] [ img category.name [ src category.icon ] ]
     in
-    [ h2 [] [ text metadata.title ]
-    , ul [] (List.map viewCategory metadata.categories)
-    ]
+    { title = static.data.metadata.title
+    , body =
+        View.Common.body
+            [ h2 [] [ text static.data.metadata.title ]
+            , ul [] (List.map viewCategory static.data.metadata.categories)
+            , article [ css [ Css.Global.descendants [ Css.Global.typeSelector "img" [ Css.maxWidth (Css.pct 100) ] ] ] ] static.data.body
+            ]
+    }
