@@ -4,16 +4,3 @@ command = "npx --no-install elm-tooling install && npm run build && npm run test
 
 [build.environment]
 ELM_HOME = "$NETLIFY_BUILD_BASE/cache/elm"
-
-[[headers]]
-for = "/*"
-[headers.values]
-Link = "<https://fonts.googleapis.com/>; rel=dns-prefetch"
-[[headers]]
-for = "/*"
-[headers.values]
-Link = "<https://fonts.gstatic.com/>; rel=preconnect; crossorigin"
-[[headers]]
-for = "/*"
-[headers.values]
-Link = "<https://fonts.gstatic.com/>; rel=dns-prefetch"
