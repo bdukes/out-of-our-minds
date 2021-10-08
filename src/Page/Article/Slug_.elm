@@ -120,13 +120,20 @@ view _ _ static =
     let
         viewCategory : Category -> Html Msg
         viewCategory category =
-            li [ css [ Css.padding2 Css.zero (Css.rem 1) ] ] [ img category.name [ src category.icon ] ]
+            li [ css [ Css.padding2 Css.zero (Css.rem 1) ] ]
+                [ img category.name [ src category.icon, css [ Css.minHeight (Css.px 50), Css.maxHeight (Css.rem 5) ] ]
+                ]
+
+        articleHeader =
+            header [ css [ Css.displayFlex, Css.justifyContent Css.spaceBetween ] ]
+                [ h2 [ css [ Css.fontSize (Css.em 2) ] ] [ text static.data.metadata.title ]
+                , ul [ css [ Css.listStyle Css.none, Css.displayFlex ] ] (List.map viewCategory static.data.metadata.categories)
+                ]
     in
     { title = static.data.metadata.title
     , body =
         View.Common.body
-            [ h2 [] [ text static.data.metadata.title ]
-            , ul [ css [ Css.listStyle Css.none, Css.displayFlex ] ] (List.map viewCategory static.data.metadata.categories)
-            , article [ css [ Css.Global.descendants [ Css.Global.typeSelector "img" [ Css.maxWidth (Css.pct 100) ] ] ] ] static.data.body
+            [ article [ css [ Css.Global.descendants [ Css.Global.typeSelector "img" [ Css.maxWidth (Css.pct 100) ] ] ] ]
+                (articleHeader :: static.data.body)
             ]
     }
