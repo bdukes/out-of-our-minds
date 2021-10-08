@@ -8,10 +8,10 @@
     "test": "elm-review"
   },
   "devDependencies": {
-    "elm-optimize-level-2": "^0.1.5",
+    "elm-optimize-level-2": "^0.2.3",
     "elm-pages": "2.1.9",
-    "elm-review": "^2.5.5",
-    "elm-tooling": "^1.4.0"
+    "elm-review": "^2.6.1",
+    "elm-tooling": "^1.6.0"
   },
   "dependencies": {}
 }
