@@ -9,9 +9,9 @@
   },
   "devDependencies": {
     "elm-optimize-level-2": "^0.2.3",
-    "elm-pages": "2.1.9",
-    "elm-review": "^2.6.1",
-    "elm-tooling": "^1.6.0"
+    "elm-pages": "2.1.11",
+    "elm-review": "^2.7.0",
+    "elm-tooling": "^1.7.0"
   },
   "dependencies": {}
 }
