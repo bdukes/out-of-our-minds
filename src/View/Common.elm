@@ -1,4 +1,4 @@
-module View.Common exposing (body, categoryImageLink, link)
+module View.Common exposing (body, categoryImageLink, categoryList, link)
 
 import Accessibility.Styled as Html exposing (..)
 import Category exposing (Category)
@@ -47,3 +47,24 @@ categoryImageLink category =
         [ css [ textAlign center ], title ("View all of the articles in the " ++ category.name ++ " category") ]
         [ img category.name [ src category.icon, css [ categoryImageStyles ] ]
         ]
+
+
+categoryList : List Category -> Html msg
+categoryList categories =
+    let
+        viewCategory : Category -> Html msg
+        viewCategory category =
+            li [ css [ Css.padding2 Css.zero (Css.rem 1) ] ]
+                [ categoryImageLink category
+                ]
+    in
+    if List.isEmpty categories then
+        none
+
+    else
+        ul [ css [ Css.listStyle Css.none, Css.displayFlex ] ] (List.map viewCategory categories)
+
+
+none : Html msg
+none =
+    text ""

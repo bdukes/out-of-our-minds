@@ -4,7 +4,6 @@ import Accessibility.Styled exposing (..)
 import Article exposing (ArticleMetadata)
 import Category exposing (Category)
 import Css
-import Css.Global
 import DataSource exposing (DataSource)
 import Head
 import Head.Seo as Seo
@@ -17,7 +16,7 @@ import Route exposing (Route)
 import Shared
 import Site
 import View exposing (View)
-import View.Common exposing (categoryImageLink)
+import View.Common exposing (categoryList)
 
 
 type alias Model =
@@ -118,22 +117,16 @@ view :
     -> View Msg
 view _ _ static =
     let
-        viewCategory : Category -> Html Msg
-        viewCategory category =
-            li [ css [ Css.padding2 Css.zero (Css.rem 1) ] ]
-                [ categoryImageLink category
-                ]
-
-        articleHeader articleMetadata =
+        articleHeader route articleMetadata =
             header [ css [ Css.displayFlex, Css.justifyContent Css.spaceBetween ] ]
-                [ h2 [ css [ Css.fontSize (Css.em 2) ] ] [ text articleMetadata.title ]
-                , ul [ css [ Css.listStyle Css.none, Css.displayFlex ] ] (List.map viewCategory articleMetadata.categories)
+                [ h2 [ css [ Css.fontSize (Css.em 2) ] ] [ View.Common.link route [] [ text articleMetadata.title ] ]
+                , categoryList articleMetadata.categories
                 ]
 
         viewArticle : ( Route, ArticleMetadata ) -> Html Msg
-        viewArticle ( _, articleMetadata ) =
-            article [ css [ Css.Global.descendants [ Css.Global.typeSelector "img" [ Css.maxWidth (Css.pct 100) ] ] ] ]
-                [ articleHeader articleMetadata, p [] [ text articleMetadata.description ] ]
+        viewArticle ( route, articleMetadata ) =
+            section []
+                [ articleHeader route articleMetadata, p [] [ text articleMetadata.description ] ]
     in
     { title = static.data.category.name
     , body =

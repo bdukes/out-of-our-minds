@@ -2,7 +2,6 @@ module Page.Article.Slug_ exposing (Data, Model, Msg, page)
 
 import Accessibility.Styled exposing (..)
 import Article exposing (ArticleMetadata)
-import Category exposing (Category)
 import Css
 import Css.Global
 import DataSource exposing (DataSource)
@@ -18,7 +17,7 @@ import Shared
 import Site
 import StructuredData
 import View exposing (View)
-import View.Common exposing (categoryImageLink)
+import View.Common exposing (categoryList)
 
 
 type alias Model =
@@ -115,16 +114,10 @@ view :
     -> View Msg
 view _ _ static =
     let
-        viewCategory : Category -> Html Msg
-        viewCategory category =
-            li [ css [ Css.padding2 Css.zero (Css.rem 1) ] ]
-                [ categoryImageLink category
-                ]
-
         articleHeader =
             header [ css [ Css.displayFlex, Css.justifyContent Css.spaceBetween ] ]
                 [ h2 [ css [ Css.fontSize (Css.em 2) ] ] [ text static.data.metadata.title ]
-                , ul [ css [ Css.listStyle Css.none, Css.displayFlex ] ] (List.map viewCategory static.data.metadata.categories)
+                , categoryList static.data.metadata.categories
                 ]
     in
     { title = static.data.metadata.title
