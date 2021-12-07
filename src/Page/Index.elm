@@ -9,7 +9,7 @@ import Head.Seo as Seo
 import Html.Styled.Attributes exposing (css, href, src)
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
-import Route exposing (Route)
+import Route
 import Shared
 import Site
 import Styles

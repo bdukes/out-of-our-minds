@@ -7,7 +7,7 @@ import Html.Styled as Html exposing (Html, fromUnstyled, toUnstyled)
 import Html.Styled.Attributes as Attr
 import Markdown.Block
 import Markdown.Html
-import Markdown.Renderer exposing (defaultHtmlRenderer, render)
+import Markdown.Renderer exposing (defaultHtmlRenderer)
 
 
 renderer : Markdown.Renderer.Renderer (Html msg)

@@ -3,7 +3,7 @@ module Site exposing (config, siteLogo, siteName, siteTagline)
 import DataSource
 import Head
 import Head.Seo exposing (Image)
-import MimeType exposing (MimeType)
+import MimeType
 import Pages.Manifest as Manifest
 import Pages.Url
 import Route

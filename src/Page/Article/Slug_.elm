@@ -1,27 +1,23 @@
 module Page.Article.Slug_ exposing (Data, Model, Msg, page)
 
 import Accessibility.Styled exposing (..)
-import Article exposing (ArticleMetadata, frontmatterDecoder)
+import Article exposing (ArticleMetadata)
 import Css
 import Css.Global
 import DataSource exposing (DataSource)
 import Date
-import Head exposing (structuredData)
+import Head
 import Head.Seo as Seo
-import Html.Styled.Attributes exposing (css, href, src)
-import Markdown.Renderer
+import Html.Styled.Attributes exposing (css, src)
 import MarkdownCodec
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
-import Pages.Url
 import Path
-import Route
 import Shared exposing (Category)
 import Site
 import StructuredData
-import Svg.Styled exposing (metadata)
 import View exposing (View)
-import View.Common exposing (link)
+import View.Common
 
 
 type alias Model =

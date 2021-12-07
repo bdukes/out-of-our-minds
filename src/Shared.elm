@@ -1,4 +1,4 @@
-module Shared exposing (Category, Data, Model, Msg, SharedMsg, categoryDataSource, template)
+module Shared exposing (Category, Data, Model, Msg, categoryDataSource, template)
 
 import Accessibility.Styled exposing (div)
 import Browser.Navigation
@@ -42,10 +42,6 @@ type alias Data =
     }
 
 
-type alias SharedMsg =
-    Never
-
-
 type alias Model =
     { showMobileMenu : Bool
     }
@@ -72,7 +68,7 @@ init _ _ _ =
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
+update _ model =
     ( { model | showMobileMenu = False }, Cmd.none )
 
 
