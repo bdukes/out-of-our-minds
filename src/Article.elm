@@ -1,4 +1,4 @@
-module Article exposing (..)
+module Article exposing (ArticleMetadata, allMetadata, articlesGlob, frontmatterDecoder)
 
 import Cloudinary
 import DataSource
