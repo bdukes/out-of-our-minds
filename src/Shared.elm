@@ -1,11 +1,11 @@
-module Shared exposing (Category, Data, Model, Msg, categoryDataSource, template)
+module Shared exposing (Data, Model, Msg, template)
 
 import Accessibility.Styled exposing (div)
 import Browser.Navigation
+import Category exposing (Category)
 import Css exposing (auto, backgroundColor, borderBox, boxSizing, color, fontFamilies, margin2, maxWidth, minHeight, qt, sansSerif, zero)
 import Css.Global exposing (descendants, everything)
 import DataSource
-import DataSource.Glob
 import Html exposing (Html)
 import Pages.Flags
 import Pages.PageUrl exposing (PageUrl)
@@ -29,12 +29,6 @@ template =
 
 type alias Msg =
     Never
-
-
-type alias Category =
-    { name : String
-    , icon : String
-    }
 
 
 type alias Data =
@@ -79,21 +73,7 @@ subscriptions _ _ =
 
 data : DataSource.DataSource Data
 data =
-    DataSource.map Data categoryDataSource
-
-
-categoryDataSource : DataSource.DataSource (List Category)
-categoryDataSource =
-    let
-        toCategory prefix imageName suffix =
-            { name = imageName, icon = prefix ++ imageName ++ suffix }
-    in
-    DataSource.Glob.succeed toCategory
-        |> DataSource.Glob.match (DataSource.Glob.literal "public")
-        |> DataSource.Glob.capture (DataSource.Glob.literal "/images/categories/")
-        |> DataSource.Glob.capture DataSource.Glob.wildcard
-        |> DataSource.Glob.capture (DataSource.Glob.literal ".svg")
-        |> DataSource.Glob.toDataSource
+    DataSource.map Data Category.dataSource
 
 
 view :

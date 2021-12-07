@@ -6,7 +6,7 @@ import Css.Media as Media exposing (only, screen, withMedia)
 import DataSource exposing (DataSource)
 import Head
 import Head.Seo as Seo
-import Html.Styled.Attributes exposing (css, href, src)
+import Html.Styled.Attributes exposing (css, src)
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
 import Route
@@ -14,7 +14,7 @@ import Shared
 import Site
 import Styles
 import View exposing (View)
-import View.Common exposing (link)
+import View.Common exposing (categoryImageLink, link)
 
 
 type alias Model =
@@ -78,14 +78,9 @@ view _ _ static =
                 [ link Route.Articles [ css [ display block, textAlign center, padding2 (Css.em 5) zero, width (pct 100), backgroundColor Styles.palette.primary, color Styles.palette.white ] ] [ text "Articles" ]
                 , link Route.Store [ css [ display block, textAlign center, padding2 (Css.em 5) zero, width (pct 100), backgroundColor Styles.palette.secondary, color Styles.palette.white ] ] [ text "Store" ]
                 ]
-            , section [ css [ logoNavStyles ] ] (List.map viewCategoryLink static.sharedData.categories)
+            , section [ css [ logoNavStyles ] ] (List.map categoryImageLink static.sharedData.categories)
             ]
     }
-
-
-viewCategoryLink : Shared.Category -> Html msg
-viewCategoryLink category =
-    a [ css [ textAlign center ], href "" ] [ img category.name [ src category.icon ] ]
 
 
 logoNavStyles : Css.Style

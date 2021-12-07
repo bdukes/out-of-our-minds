@@ -1,5 +1,6 @@
 module Article exposing (ArticleMetadata, allMetadata, articlesGlob, frontmatterDecoder)
 
+import Category exposing (Category)
 import Cloudinary
 import DataSource
 import DataSource.File as File
@@ -9,7 +10,6 @@ import List.Extra
 import OptimizedDecoder
 import Pages.Url exposing (Url)
 import Route
-import Shared exposing (Category)
 
 
 type alias Article =
@@ -41,7 +41,7 @@ allMetadata =
                                 (File.onlyFrontmatter (frontmatterDecoder categories) filePath)
                         )
             )
-            Shared.categoryDataSource
+            Category.dataSource
         |> DataSource.resolve
         |> DataSource.map
             (\articles ->

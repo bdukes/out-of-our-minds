@@ -2,22 +2,23 @@ module Page.Article.Slug_ exposing (Data, Model, Msg, page)
 
 import Accessibility.Styled exposing (..)
 import Article exposing (ArticleMetadata)
+import Category exposing (Category)
 import Css
 import Css.Global
 import DataSource exposing (DataSource)
 import Date
 import Head
 import Head.Seo as Seo
-import Html.Styled.Attributes exposing (css, src)
+import Html.Styled.Attributes exposing (css)
 import MarkdownCodec
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
 import Path
-import Shared exposing (Category)
+import Shared
 import Site
 import StructuredData
 import View exposing (View)
-import View.Common
+import View.Common exposing (categoryImageLink)
 
 
 type alias Model =
@@ -117,7 +118,7 @@ view _ _ static =
         viewCategory : Category -> Html Msg
         viewCategory category =
             li [ css [ Css.padding2 Css.zero (Css.rem 1) ] ]
-                [ img category.name [ src category.icon, css [ Css.minHeight (Css.px 50), Css.maxHeight (Css.rem 5) ] ]
+                [ categoryImageLink category
                 ]
 
         articleHeader =

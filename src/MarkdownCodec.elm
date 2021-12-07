@@ -1,6 +1,7 @@
 module MarkdownCodec exposing (withFrontmatter)
 
 import Article exposing (ArticleMetadata, frontmatterDecoder)
+import Category
 import DataSource exposing (DataSource)
 import DataSource.File as StaticFile
 import Html.Styled exposing (Html)
@@ -9,7 +10,6 @@ import Markdown.Parser
 import Markdown.Renderer
 import MarkdownRenderer
 import Serialize as S
-import Shared
 
 
 withFrontmatter :
@@ -19,7 +19,7 @@ withFrontmatter :
 withFrontmatter constructor filePath =
     let
         frontmatterDataSource =
-            Shared.categoryDataSource
+            Category.dataSource
                 |> DataSource.andThen
                     (\categories ->
                         StaticFile.onlyFrontmatter

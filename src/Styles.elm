@@ -1,4 +1,4 @@
-module Styles exposing (palette)
+module Styles exposing (categoryImageStyles, palette)
 
 import Css
 
@@ -48,3 +48,11 @@ palette =
     , accentLight = Css.hsl accent.hue accent.saturation 0.6
     , accentDark = Css.hsl accent.hue accent.saturation 0.4
     }
+
+
+categoryImageStyles : Css.Style
+categoryImageStyles =
+    Css.batch
+        [ Css.minHeight (Css.px 50)
+        , Css.maxHeight (Css.rem 5)
+        ]

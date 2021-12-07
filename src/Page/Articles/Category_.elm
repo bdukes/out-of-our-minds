@@ -2,21 +2,22 @@ module Page.Articles.Category_ exposing (Data, Model, Msg, page)
 
 import Accessibility.Styled exposing (..)
 import Article exposing (ArticleMetadata)
+import Category exposing (Category)
 import Css
 import Css.Global
 import DataSource exposing (DataSource)
 import Head
 import Head.Seo as Seo
-import Html.Styled.Attributes exposing (css, src)
+import Html.Styled.Attributes exposing (css)
 import List.Extra
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
 import Route exposing (Route)
-import Shared exposing (Category)
+import Shared
 import Site
 import View exposing (View)
-import View.Common
+import View.Common exposing (categoryImageLink)
 
 
 type alias Model =
@@ -43,7 +44,7 @@ page =
 
 routes : DataSource (List RouteParams)
 routes =
-    Shared.categoryDataSource
+    Category.dataSource
         |> DataSource.map (List.map .name)
         |> DataSource.map (List.map RouteParams)
 
@@ -66,7 +67,7 @@ data routeParams =
             String.toUpper name == String.toUpper routeParams.category
 
         categoryDataSource =
-            Shared.categoryDataSource
+            Category.dataSource
                 |> DataSource.map (List.Extra.find isMatchingCategory)
                 |> DataSource.map (Maybe.map DataSource.succeed)
                 |> DataSource.andThen (Maybe.withDefault (DataSource.fail "No matching category"))
@@ -120,7 +121,7 @@ view _ _ static =
         viewCategory : Category -> Html Msg
         viewCategory category =
             li [ css [ Css.padding2 Css.zero (Css.rem 1) ] ]
-                [ img category.name [ src category.icon, css [ Css.minHeight (Css.px 50), Css.maxHeight (Css.rem 5) ] ]
+                [ categoryImageLink category
                 ]
 
         articleHeader articleMetadata =
