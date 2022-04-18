@@ -11,7 +11,7 @@
     "elm-optimize-level-2": "^0.3.4",
     "elm-pages": "2.1.11",
     "elm-review": "^2.7.1",
-    "elm-tooling": "^1.7.0"
+    "elm-tooling": "^1.8.0"
   },
   "dependencies": {}
 }
