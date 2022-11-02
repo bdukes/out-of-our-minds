@@ -22,7 +22,7 @@
             "elm-community/list-extra": "8.7.0",
             "justinmimbs/date": "3.2.1",
             "rtfeldman/elm-css": "17.1.1",
-            "tesk9/accessible-html-with-css": "3.4.0"
+            "tesk9/accessible-html-with-css": "4.1.0"
         },
         "indirect": {
             "avh4/elm-color": "1.0.0",
