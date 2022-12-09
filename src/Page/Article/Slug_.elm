@@ -125,7 +125,7 @@ view _ _ static =
                     ]
                 ]
                 [ View.Common.pageHeading [] [ text static.data.metadata.title ]
-                , View.Common.categoryList static.data.metadata.categories
+                , View.Common.categoryList [] static.data.metadata.categories
                 ]
 
         contentStyles =

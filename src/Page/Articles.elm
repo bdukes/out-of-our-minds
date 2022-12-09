@@ -1,7 +1,7 @@
 module Page.Articles exposing (Data, Model, Msg, page)
 
 import Accessibility.Styled exposing (..)
-import Article exposing (ArticleMetadata)
+import Article
 import DataSource exposing (DataSource)
 import Head
 import Head.Seo as Seo
@@ -68,14 +68,7 @@ view _ _ static =
     { title = "Articles | Out of Our Minds"
     , body =
         View.Common.body
-            [ View.Common.pageHeading [] [ text "All articles" ]
-            , ul [] (List.map viewArticle static.data)
-            ]
+            (View.Common.pageHeading [] [ text "All articles" ]
+                :: View.Common.articleList static.data
+            )
     }
-
-
-viewArticle : ( Route, ArticleMetadata ) -> Html msg
-viewArticle ( route, metadata ) =
-    li []
-        [ View.Common.link route [] [ text metadata.title ]
-        ]

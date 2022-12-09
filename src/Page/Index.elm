@@ -87,7 +87,7 @@ logoNavStyles : Css.Style
 logoNavStyles =
     Css.batch
         [ Css.property "display" "grid"
-        , Css.property "grid-gap" "1em"
+        , Css.property "gap" "1em"
         , Css.property "grid-template-columns" " 1fr"
         , withMedia [ only screen [ Media.minWidth (Css.px 300), Media.maxWidth (Css.px 449) ] ]
             [ Css.property "grid-template-columns" "repeat(2, 1fr)"

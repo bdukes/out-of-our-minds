@@ -3,11 +3,9 @@ module Page.Articles.Category_ exposing (Data, Model, Msg, page)
 import Accessibility.Styled exposing (..)
 import Article exposing (ArticleMetadata)
 import Category exposing (Category)
-import Css
 import DataSource exposing (DataSource)
 import Head
 import Head.Seo as Seo
-import Html.Styled.Attributes exposing (css)
 import List.Extra
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
@@ -16,7 +14,7 @@ import Route exposing (Route)
 import Shared
 import Site
 import View exposing (View)
-import View.Common exposing (categoryList)
+import View.Common
 
 
 type alias Model =
@@ -116,20 +114,10 @@ view :
     -> StaticPayload Data RouteParams
     -> View Msg
 view _ _ static =
-    let
-        articleHeader route articleMetadata =
-            header [ css [ Css.displayFlex, Css.justifyContent Css.spaceBetween ] ]
-                [ View.Common.pageHeading [] [ View.Common.link route [] [ text articleMetadata.title ] ]
-                , categoryList articleMetadata.categories
-                ]
-
-        viewArticle : ( Route, ArticleMetadata ) -> Html Msg
-        viewArticle ( route, articleMetadata ) =
-            section []
-                [ articleHeader route articleMetadata, p [] [ text articleMetadata.description ] ]
-    in
     { title = static.data.category.name
     , body =
         View.Common.body
-            (List.map viewArticle static.data.articles)
+            (View.Common.pageHeading [] [ text ("Articles about " ++ static.data.category.name) ]
+                :: View.Common.articleList static.data.articles
+            )
     }
