@@ -127,11 +127,24 @@ view _ _ static =
                 [ View.Common.pageHeading [] [ text static.data.metadata.title ]
                 , View.Common.categoryList static.data.metadata.categories
                 ]
+
+        contentStyles =
+            Css.Global.descendants
+                [ Css.Global.p
+                    [ Css.displayFlex
+                    , Css.property "gap" "1em"
+                    ]
+                , Css.Global.img
+                    [ Css.maxWidth (Css.pct 100)
+                    , Css.maxHeight (Css.vh 75)
+                    , Css.margin2 Css.zero Css.auto
+                    ]
+                ]
     in
     { title = static.data.metadata.title
     , body =
         View.Common.body
-            [ article [ css [ Css.Global.descendants [ Css.Global.typeSelector "img" [ Css.maxWidth (Css.pct 100) ] ] ] ]
+            [ article [ css [ contentStyles ] ]
                 (articleHeader :: static.data.body)
             ]
     }
