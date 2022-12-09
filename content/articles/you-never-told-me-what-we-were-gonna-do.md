@@ -48,12 +48,12 @@ The room breathed again, a sad, collective breath. I think kids do need help to 
 
 I can imagine this scenario has played out before. Maybe the mom thought that if she didn’t mention it, he couldn’t possibly get worked up. But he did. Even if it seems basic to her, he felt blindsided by a lack of expectation settings. 
 
-
+--------------
 
 
 Let’s imagine a version of this with a simple conversation before they enter. 
 
-As mom found a parking spot she could have said, “Hey buddy, here’s the plan. When we park, I’d like your help to carry in this stack of books. I’m glad I have a strong guy like you to help me. After we drop them into the slot, I need to grab a form from after school, and I’d like you to go with me. Then we can head right home.”
+As mom found a parking spot she could have said, “Hey buddy, here’s the plan. When we park, I’d like your help to carry in this stack of books. I’m glad I have a strong guy like you to help me. After we drop them into the slot, I need to grab a form from the after school club, and I’d like you to go with me. Then we can head right home.”
 
 “I don’t want to go into that room.”
 
