@@ -4,6 +4,7 @@ import Accessibility.Styled exposing (..)
 import Article exposing (ArticleMetadata)
 import Css
 import Css.Global
+import Css.Media as Media exposing (only, screen, withMedia)
 import DataSource exposing (DataSource)
 import Date
 import Head
@@ -17,7 +18,7 @@ import Shared
 import Site
 import StructuredData
 import View exposing (View)
-import View.Common exposing (categoryList)
+import View.Common
 
 
 type alias Model =
@@ -115,9 +116,16 @@ view :
 view _ _ static =
     let
         articleHeader =
-            header [ css [ Css.displayFlex, Css.justifyContent Css.spaceBetween ] ]
-                [ h2 [ css [ Css.fontSize (Css.em 2) ] ] [ text static.data.metadata.title ]
-                , categoryList static.data.metadata.categories
+            header
+                [ css
+                    [ withMedia [ only screen [ Media.minWidth (Css.px 960) ] ]
+                        [ Css.displayFlex
+                        , Css.justifyContent Css.spaceBetween
+                        ]
+                    ]
+                ]
+                [ View.Common.pageHeading [] [ text static.data.metadata.title ]
+                , View.Common.categoryList static.data.metadata.categories
                 ]
     in
     { title = static.data.metadata.title

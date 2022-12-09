@@ -68,7 +68,7 @@ view _ _ static =
     { title = "Articles | Out of Our Minds"
     , body =
         View.Common.body
-            [ h2 [] [ text "All articles" ]
+            [ View.Common.pageHeading [] [ text "All articles" ]
             , ul [] (List.map viewArticle static.data)
             ]
     }

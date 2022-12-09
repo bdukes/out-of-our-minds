@@ -119,7 +119,7 @@ view _ _ static =
     let
         articleHeader route articleMetadata =
             header [ css [ Css.displayFlex, Css.justifyContent Css.spaceBetween ] ]
-                [ h2 [ css [ Css.fontSize (Css.em 2) ] ] [ View.Common.link route [] [ text articleMetadata.title ] ]
+                [ View.Common.pageHeading [] [ View.Common.link route [] [ text articleMetadata.title ] ]
                 , categoryList articleMetadata.categories
                 ]
 

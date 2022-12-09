@@ -1,8 +1,9 @@
-module View.Common exposing (body, categoryImageLink, categoryList, link)
+module View.Common exposing (body, categoryImageLink, categoryList, link, pageHeading)
 
 import Accessibility.Styled as Html exposing (..)
 import Category exposing (Category)
-import Css exposing (center, textAlign)
+import Css exposing (center, textAlign, zero)
+import Css.Media as Media exposing (only, screen, withMedia)
 import Html.Styled.Attributes exposing (css, src, title)
 import Route exposing (Route)
 import Styles exposing (categoryImageStyles)
@@ -62,7 +63,22 @@ categoryList categories =
         none
 
     else
-        ul [ css [ Css.listStyle Css.none, Css.displayFlex ] ] (List.map viewCategory categories)
+        ul [ css [ Css.listStyle Css.none, Css.displayFlex, Css.padding zero ] ]
+            (List.map viewCategory categories)
+
+
+pageHeading : List (Attribute Never) -> List (Html msg) -> Html msg
+pageHeading attributes children =
+    let
+        fontSizeStyle =
+            css
+                [ Css.fontSize (Css.em 1.8)
+                , withMedia [ only screen [ Media.minWidth (Css.px 960) ] ]
+                    [ Css.fontSize (Css.em 2) ]
+                ]
+    in
+    h2 (fontSizeStyle :: attributes)
+        children
 
 
 none : Html msg
