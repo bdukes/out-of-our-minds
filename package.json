@@ -5,7 +5,8 @@
     "postinstall": "elm-tooling install",
     "start": "elm-pages dev",
     "build": "elm-pages build",
-    "test": "elm-review"
+    "test": "elm-review",
+    "fix": "elm-review --fix"
   },
   "devDependencies": {
     "elm-optimize-level-2": "^0.3.5",
