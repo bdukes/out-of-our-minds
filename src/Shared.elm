@@ -7,6 +7,7 @@ import Css exposing (auto, backgroundColor, borderBox, boxSizing, color, fontFam
 import Css.Global exposing (descendants, everything)
 import DataSource
 import Html exposing (Html)
+import Html.Styled.Attributes exposing (css)
 import Pages.Flags
 import Pages.PageUrl exposing (PageUrl)
 import Path exposing (Path)
@@ -88,7 +89,7 @@ view :
     -> { body : Html msg, title : String }
 view _ _ _ _ pageView =
     { title = pageView.title
-    , body = div [] (bodyStyles :: pageView.body) |> Accessibility.Styled.toUnstyled
+    , body = div [ css [ Css.padding (Css.em 0.5) ] ] (bodyStyles :: pageView.body) |> Accessibility.Styled.toUnstyled
     }
 
 
