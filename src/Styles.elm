@@ -34,13 +34,29 @@ accent =
     }
 
 
-palette : { white : Css.Color, black : Css.Color, primary : Css.Color, primaryLight : Css.Color, primaryDark : Css.Color, secondary : Css.Color, secondaryLight : Css.Color, secondaryDark : Css.Color, accent : Css.Color, accentLight : Css.Color, accentDark : Css.Color }
+palette :
+    { white : Css.Color
+    , black : Css.Color
+    , primary : Css.Color
+    , primaryLight : Css.Color
+    , primaryDark : Css.Color
+    , primaryMuted : Css.Color
+    , primaryDeep : Css.Color
+    , secondary : Css.Color
+    , secondaryLight : Css.Color
+    , secondaryDark : Css.Color
+    , accent : Css.Color
+    , accentLight : Css.Color
+    , accentDark : Css.Color
+    }
 palette =
     { white = Css.hsl primary.hue 0 0.99
     , black = Css.hsl primary.hue 1 0.01
     , primary = Css.hsl primary.hue primary.saturation 0.337
     , primaryLight = Css.hsl primary.hue primary.saturation 0.5
     , primaryDark = Css.hsl primary.hue primary.saturation 0.3
+    , primaryMuted = Css.hsl primary.hue primary.saturation 0.95
+    , primaryDeep = Css.hsl primary.hue primary.saturation 0.1
     , secondary = Css.hsl secondary.hue secondary.saturation 0.522
     , secondaryLight = Css.hsl secondary.hue secondary.saturation 0.6
     , secondaryDark = Css.hsl secondary.hue secondary.saturation 0.4

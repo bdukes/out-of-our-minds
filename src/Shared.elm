@@ -3,7 +3,7 @@ module Shared exposing (Data, Model, Msg, template)
 import Accessibility.Styled exposing (div)
 import Browser.Navigation
 import Category exposing (Category)
-import Css exposing (auto, backgroundColor, borderBox, boxSizing, color, fontFamilies, margin2, maxWidth, minHeight, qt, sansSerif, zero)
+import Css exposing (borderBox, boxSizing, margin, zero)
 import Css.Global exposing (descendants, everything)
 import DataSource
 import Html exposing (Html)
@@ -13,7 +13,6 @@ import Pages.PageUrl exposing (PageUrl)
 import Path exposing (Path)
 import Route exposing (Route)
 import SharedTemplate exposing (SharedTemplate)
-import Styles
 import View exposing (View)
 
 
@@ -89,7 +88,22 @@ view :
     -> { body : Html msg, title : String }
 view _ _ _ _ pageView =
     { title = pageView.title
-    , body = div [ css [ Css.padding (Css.em 0.5) ] ] (bodyStyles :: pageView.body) |> Accessibility.Styled.toUnstyled
+    , body =
+        div
+            [ css
+                [ Css.minHeight (Css.vh 100)
+                , Css.property "display" "grid"
+                , Css.property "gap" "0.5em"
+                , Css.property "grid-template-areas"
+                    """
+                    "header"
+                    "main"
+                    "footer"
+                    """
+                ]
+            ]
+            (bodyStyles :: pageView.body)
+            |> Accessibility.Styled.toUnstyled
     }
 
 
@@ -97,12 +111,7 @@ bodyStyles : Accessibility.Styled.Html msg
 bodyStyles =
     Css.Global.global
         [ Css.Global.body
-            [ fontFamilies [ qt "Open Sans", .value sansSerif ]
-            , backgroundColor Styles.palette.white
-            , color Styles.palette.black
-            , margin2 zero auto
-            , maxWidth (Css.px 960)
-            , minHeight (Css.vh 100)
+            [ margin zero
             , descendants [ everything [ boxSizing borderBox ] ]
             ]
         ]

@@ -3,30 +3,72 @@ module View.Common exposing (articleList, body, categoryImageLink, categoryList,
 import Accessibility.Styled as Html exposing (..)
 import Article exposing (ArticleMetadata)
 import Category exposing (Category)
-import Css exposing (center, textAlign, zero)
+import Css exposing (auto, backgroundColor, center, color, fontFamilies, margin2, maxWidth, minHeight, sansSerif, textAlign, width, zero)
 import Css.Media as Media exposing (only, screen, withMedia)
-import Html.Styled.Attributes exposing (css, src, title)
+import Html.Styled.Attributes as Attr exposing (css, src, title)
 import Route exposing (Route)
 import Styles exposing (categoryImageStyles)
 
 
+mainStyle : Css.Style
+mainStyle =
+    Css.batch
+        [ fontFamilies [ Css.qt "Open Sans", .value sansSerif ]
+        , backgroundColor Styles.palette.white
+        , color Styles.palette.black
+        , margin2 zero auto
+        , width (Css.pct 100)
+        , maxWidth (Css.px 960)
+        ]
+
+
 mainHeader : Html msg
 mainHeader =
-    Html.header []
+    Html.header [ css [ mainStyle, Css.property "grid-area" "header" ] ]
         [ link Route.Index [] [ img "Out of Our Minds" [ src "/images/logo-main.svg" ] ]
         ]
 
 
-footer : Html msg
-footer =
-    Html.footer [] []
+mainFooter : Html msg
+mainFooter =
+    let
+        iconStyle =
+            Css.batch [ Css.height (Css.em 1), Css.position Css.relative, Css.bottom (Css.em -0.1) ]
+    in
+    Html.footer
+        [ css
+            [ Css.backgroundColor Styles.palette.primaryMuted
+            , Css.color Styles.palette.primaryDeep
+            , Css.property "grid-area" "footer"
+            , Css.alignSelf Css.end
+            , Css.textAlign Css.center
+            , Css.padding (Css.em 1)
+            ]
+        , Attr.attribute "xmlns:cc" "http://creativecommons.org/ns#"
+        ]
+        [ Html.small []
+            [ text "Text and images are works by "
+            , Html.span [ Attr.attribute "property" "cc:attributionName" ] [ text "Nikki Dukes" ]
+            , text " and licensed under "
+            , Html.a [ Attr.href "http://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1", Attr.target "_blank", Attr.rel "license noopener noreferrer" ]
+                [ Html.figure [ css [ Css.display Css.inlineFlex, Css.margin zero, Css.property "gap" "0.25em" ] ]
+                    [ Html.figcaption [ css [ Css.display Css.inline, Css.color Styles.palette.primaryDeep, Css.textDecoration Css.underline ] ]
+                        [ text "Attribution-NonCommercial 4.0 International"
+                        ]
+                    , Html.decorativeImg [ src "https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1", css [ iconStyle ] ]
+                    , Html.decorativeImg [ src "https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1", css [ iconStyle ] ]
+                    , Html.decorativeImg [ src "https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1", css [ iconStyle ] ]
+                    ]
+                ]
+            ]
+        ]
 
 
 body : List (Html msg) -> List (Html msg)
 body contents =
     [ mainHeader
-    , main_ [] contents
-    , footer
+    , main_ [ css [ mainStyle, Css.property "grid-area" "main" ] ] contents
+    , mainFooter
     ]
 
 
@@ -34,7 +76,7 @@ link : Route -> List (Attribute Never) -> List (Html msg) -> Html msg
 link route attributes children =
     Route.toLink
         (\anchorAttrs ->
-            a (List.map Html.Styled.Attributes.fromUnstyled anchorAttrs ++ attributes) children
+            a (List.map Attr.fromUnstyled anchorAttrs ++ attributes) children
         )
         route
 
