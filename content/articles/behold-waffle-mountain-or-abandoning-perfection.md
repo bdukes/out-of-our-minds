@@ -32,5 +32,4 @@ So behold, waffle mountain. A regular adventure in our house. I could see failur
 Reframing can make all the difference: Green muffins? Hulk Muffins. Broken waffles? Waffle mountain.
 
 ![Broken waffle on griddle](/images/articles/behold-waffle-mountain-or-abandoning-perfection/IMG_20210603_165852884_HDR.jpg)
-
 ![Pile of waffles on pan](/images/articles/behold-waffle-mountain-or-abandoning-perfection/IMG_20210603_170334918_HDR.jpg)

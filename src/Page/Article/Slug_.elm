@@ -130,9 +130,10 @@ view _ _ static =
 
         contentStyles =
             Css.Global.descendants
-                [ Css.Global.p
+                [ Css.Global.selector "p:has(img)"
                     [ Css.displayFlex
                     , Css.property "gap" "1em"
+                    , Css.flexWrap Css.wrap
                     ]
                 , Css.Global.img
                     [ Css.maxWidth (Css.pct 100)

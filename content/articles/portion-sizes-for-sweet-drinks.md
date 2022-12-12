@@ -25,9 +25,7 @@ We portion juice in three ways:
 3. Mix with water. We might add a splash of juice to water or a splash of water to juice. If the kids are playing hard, the juice helps keep blood sugar from dropping and lets the fun continue a bit longer. Collagen powder<ooom-footnote-ref id="1" /> is often a good mix in with juice and water, too.
 
 ![Three empty glass spice jars on a white counter](/images/articles/portion-sizes-for-sweet-drinks/IMG_20210925_135155068~2.jpg)
-
 ![A 4 ounce box of Juicy Juice apple juice](/images/articles/portion-sizes-for-sweet-drinks/IMG_20210925_135959770.jpg)
-
 ![Three mugs, large, medium, and small](/images/articles/portion-sizes-for-sweet-drinks/IMG_20210925_135324510~2.jpg)
 
 Using miniature mugs for hot drinks lets us control portion sizes for hot cocoa, steamers, cider, and other warm sweet drinks. Though we usually make our own hot chocolate mix, there are a few fair trade packs of cocoa mix we’ve found over the years and half a pack in a mini mug is perfect.
