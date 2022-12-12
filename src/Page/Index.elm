@@ -1,7 +1,7 @@
 module Page.Index exposing (Data, Model, Msg, page)
 
 import Accessibility.Styled exposing (..)
-import Css exposing (alignItems, backgroundColor, block, center, color, display, displayFlex, justifyContent, padding2, pct, spaceAround, textAlign, width, zero)
+import Css exposing (alignItems, block, center, color, display, displayFlex, justifyContent, padding2, pct, spaceAround, textAlign, width, zero)
 import Css.Media as Media exposing (only, screen, withMedia)
 import DataSource exposing (DataSource)
 import Head
