@@ -1,4 +1,4 @@
-module View.Common exposing (articleList, body, categoryImageLink, categoryList, link, pageHeading)
+module View.Common exposing (articleList, body, categoryImageLink, categoryList, link, linkStyle, pageHeading)
 
 import Accessibility.Styled as Html exposing (..)
 import Article exposing (ArticleMetadata)
@@ -96,6 +96,16 @@ listHeading attributes children =
         children
 
 
+linkStyle : Css.Style
+linkStyle =
+    Css.batch
+        [ Css.color Styles.palette.primary
+        , Css.visited [ Css.color Styles.palette.secondaryDark ]
+        , Css.hover [ Css.color Styles.palette.secondary ]
+        , Css.focus [ Css.color Styles.palette.secondary ]
+        ]
+
+
 articleList : List ( Route, ArticleMetadata ) -> List (Html msg)
 articleList articles =
     let
@@ -121,7 +131,7 @@ articleList articles =
                     ]
                 ]
                 [ listHeading [ css [ Css.property "grid-area" "title", Css.marginBottom zero ] ]
-                    [ link route [] [ text articleMetadata.title ]
+                    [ link route [ css [ linkStyle ] ] [ text articleMetadata.title ]
                     ]
                 , categoryList
                     [ css

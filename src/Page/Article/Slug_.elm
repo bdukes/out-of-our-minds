@@ -139,6 +139,9 @@ view _ _ static =
                     , Css.maxHeight (Css.vh 75)
                     , Css.margin2 Css.zero Css.auto
                     ]
+                , Css.Global.a
+                    [ View.Common.linkStyle
+                    ]
                 ]
     in
     { title = static.data.metadata.title
