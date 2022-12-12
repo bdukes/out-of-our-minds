@@ -71,22 +71,44 @@ view _ _ static =
     { title = "Out of Our Minds"
     , body =
         View.Common.body
-            [ section []
+            [ section [ css [ Css.marginBottom (Css.em 2) ] ]
                 [ img "Creative resources bringing order to chaos for families" [ css [ width (pct 100), padding2 zero (Css.em 2) ], src "/images/tagline.svg" ]
                 ]
-            , section [ css [ displayFlex, justifyContent spaceAround, alignItems center ] ]
-                [ link Route.Articles [ css [ display block, textAlign center, padding2 (Css.em 5) zero, width (pct 100), backgroundColor Styles.palette.primary, color Styles.palette.white ] ] [ text "Articles" ]
-                , link Route.Store [ css [ display block, textAlign center, padding2 (Css.em 5) zero, width (pct 100), backgroundColor Styles.palette.secondary, color Styles.palette.white ] ] [ text "Store" ]
+            , section [ css [ bannersStyle ] ]
+                [ link Route.Articles [ css [ bannerStyle Styles.palette.primary ] ] [ text "Articles" ]
+                , link Route.Store [ css [ bannerStyle Styles.palette.secondary ] ] [ text "Store" ]
                 ]
             , section [ css [ logoNavStyles ] ] (List.map categoryImageLink static.sharedData.categories)
             ]
     }
 
 
+bannersStyle : Css.Style
+bannersStyle =
+    withMedia [ only screen [ Media.minWidth (Css.px 450) ] ]
+        [ displayFlex
+        , justifyContent spaceAround
+        , alignItems center
+        ]
+
+
+bannerStyle : Css.Color -> Css.Style
+bannerStyle backgroundColor =
+    Css.batch
+        [ display block
+        , textAlign center
+        , padding2 (Css.em 5) zero
+        , width (pct 100)
+        , Css.backgroundColor backgroundColor
+        , color Styles.palette.white
+        ]
+
+
 logoNavStyles : Css.Style
 logoNavStyles =
     Css.batch
-        [ Css.property "display" "grid"
+        [ Css.margin2 (Css.em 2) zero
+        , Css.property "display" "grid"
         , Css.property "gap" "1em"
         , Css.property "grid-template-columns" " 1fr"
         , withMedia [ only screen [ Media.minWidth (Css.px 300), Media.maxWidth (Css.px 449) ] ]
