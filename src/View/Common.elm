@@ -106,15 +106,30 @@ articleList articles =
                     , Css.property "gap" "1em"
                     , Css.property "grid-template-areas"
                         """
-                        "title       categories"
-                        "description categories"
+                        "title"
+                        "categories"
+                        "description"
                         """
+                    , withMedia [ only screen [ Media.minWidth (Css.px 550) ] ]
+                        [ Css.property "grid-template-areas"
+                            """
+                            "title       categories"
+                            "description categories"
+                            """
+                        ]
+                    , Css.borderBottom3 (Css.em 0.05) Css.solid Styles.palette.accentLight
                     ]
                 ]
                 [ listHeading [ css [ Css.property "grid-area" "title", Css.marginBottom zero ] ]
                     [ link route [] [ text articleMetadata.title ]
                     ]
-                , categoryList [ css [ Css.property "grid-area" "categories" ] ]
+                , categoryList
+                    [ css
+                        [ Css.property "grid-area" "categories"
+                        , Css.justifyContent Css.flexStart
+                        , withMedia [ only screen [ Media.minWidth (Css.px 550) ] ] [ Css.justifyContent Css.flexEnd ]
+                        ]
+                    ]
                     articleMetadata.categories
                 , p [ css [ Css.property "grid-area" "description", Css.margin zero ] ]
                     [ text articleMetadata.description
