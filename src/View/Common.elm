@@ -3,7 +3,7 @@ module View.Common exposing (articleList, body, categoryImageLink, categoryList,
 import Accessibility.Styled as Html exposing (..)
 import Article exposing (ArticleMetadata)
 import Category exposing (Category)
-import Css exposing (auto, backgroundColor, center, color, fontFamilies, margin2, maxWidth, minHeight, sansSerif, textAlign, width, zero)
+import Css exposing (auto, backgroundColor, center, color, fontFamilies, margin2, maxWidth, sansSerif, textAlign, width, zero)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Html.Styled.Attributes as Attr exposing (css, src, title)
 import Route exposing (Route)
@@ -24,7 +24,7 @@ mainStyle =
 
 mainHeader : Html msg
 mainHeader =
-    Html.header [ css [ mainStyle, Css.property "grid-area" "header" ] ]
+    Html.header [ css [ mainStyle, Css.marginTop (Css.em 1), Css.property "grid-area" "header" ] ]
         [ link Route.Index [] [ img "Out of Our Minds" [ src "/images/logo-main.svg" ] ]
         ]
 
