@@ -9,7 +9,7 @@
         "direct": {
             "MartinSStewart/elm-serialize": "1.3.0",
             "danyx23/elm-mimetype": "4.0.1",
-            "dillonkearns/elm-markdown": "7.0.0",
+            "dillonkearns/elm-markdown": "7.0.1",
             "dillonkearns/elm-pages": "9.0.0",
             "dillonkearns/elm-rss": "2.0.3",
             "dillonkearns/elm-sitemap": "1.0.2",
