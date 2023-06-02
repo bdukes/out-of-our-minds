@@ -25,4 +25,4 @@ We do ask, that if you know our family in real life, to please refrain from ment
 
 ### Signatures of privacy
 
-![Signatures from three children](/images/articles/on-sharing-the-private-lives-of-my-children/signatures.png)
+![Signatures from three children](/images/articles/on-sharing-the-private-lives-of-my-children/signatures.jpg)
