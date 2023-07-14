@@ -21,7 +21,7 @@
             "elm/url": "1.0.0",
             "elm-community/list-extra": "8.7.0",
             "justinmimbs/date": "4.0.1",
-            "rtfeldman/elm-css": "17.1.1",
+            "rtfeldman/elm-css": "18.0.0",
             "tesk9/accessible-html-with-css": "5.2.1"
         },
         "indirect": {
