@@ -38,11 +38,15 @@ palette :
     { white : Css.Color
     , black : Css.Color
     , primary : Css.Color
+    , primaryTransparent : Css.Color
+    , primarySemiTransparent : Css.Color
     , primaryLight : Css.Color
     , primaryDark : Css.Color
     , primaryMuted : Css.Color
     , primaryDeep : Css.Color
     , secondary : Css.Color
+    , secondaryTransparent : Css.Color
+    , secondarySemiTransparent : Css.Color
     , secondaryLight : Css.Color
     , secondaryDark : Css.Color
     , accent : Css.Color
@@ -53,11 +57,15 @@ palette =
     { white = Css.hsl primary.hue 0 0.99
     , black = Css.hsl primary.hue 1 0.01
     , primary = Css.hsl primary.hue primary.saturation 0.337
+    , primaryTransparent = Css.hsla primary.hue primary.saturation 0.337 0.75
+    , primarySemiTransparent = Css.hsla primary.hue primary.saturation 0.337 0.9
     , primaryLight = Css.hsl primary.hue primary.saturation 0.5
     , primaryDark = Css.hsl primary.hue primary.saturation 0.3
     , primaryMuted = Css.hsl primary.hue primary.saturation 0.95
     , primaryDeep = Css.hsl primary.hue primary.saturation 0.1
     , secondary = Css.hsl secondary.hue secondary.saturation 0.522
+    , secondaryTransparent = Css.hsla secondary.hue secondary.saturation 0.522 0.75
+    , secondarySemiTransparent = Css.hsla secondary.hue secondary.saturation 0.522 0.9
     , secondaryLight = Css.hsl secondary.hue secondary.saturation 0.6
     , secondaryDark = Css.hsl secondary.hue secondary.saturation 0.4
     , accent = Css.hsl accent.hue accent.saturation 0.48

@@ -1,7 +1,7 @@
 module Page.Index exposing (Data, Model, Msg, page)
 
 import Accessibility.Styled exposing (..)
-import Css exposing (alignItems, block, center, color, display, displayFlex, justifyContent, padding2, pct, spaceAround, textAlign, width, zero)
+import Css exposing (alignItems, block, bold, center, color, display, displayFlex, fontWeight, justifyContent, none, padding2, pct, spaceAround, textAlign, textDecoration, width, zero)
 import Css.Media as Media exposing (only, screen, withMedia)
 import DataSource exposing (DataSource)
 import Head
@@ -75,8 +75,8 @@ view _ _ static =
                 [ img "Creative resources bringing order to chaos for families" [ css [ width (pct 100), padding2 zero (Css.em 2) ], src "/images/tagline.svg" ]
                 ]
             , section [ css [ bannersStyle ] ]
-                [ link Route.Articles [ css [ bannerStyle Styles.palette.primary ] ] [ text "Articles" ]
-                , link Route.Store [ css [ bannerStyle Styles.palette.secondary ] ] [ text "Store" ]
+                [ link Route.Articles [ css [ bannerStyle Styles.palette.primaryTransparent Styles.palette.primarySemiTransparent "/images/bg-paper.jpg" ] ] [ text "Articles" ]
+                , link Route.Store [ css [ bannerStyle Styles.palette.secondaryTransparent Styles.palette.secondarySemiTransparent "/images/bg-books.jpg" ] ] [ text "Store" ]
                 ]
             , section [ css [ logoNavStyles ] ] (List.map categoryImageLink static.sharedData.categories)
             ]
@@ -92,15 +92,23 @@ bannersStyle =
         ]
 
 
-bannerStyle : Css.Color -> Css.Style
-bannerStyle backgroundColor =
+bannerStyle : Css.Color -> Css.Color -> String -> Css.Style
+bannerStyle backgroundColor hoverColor backgroundImageUrl =
     Css.batch
         [ display block
         , textAlign center
         , padding2 (Css.em 5) zero
         , width (pct 100)
-        , Css.backgroundColor backgroundColor
+        , Css.backgroundSize Css.cover
+        , Css.backgroundRepeat Css.noRepeat
+        , Css.backgroundPosition Css.center
+        , Css.property "background-image" ("linear-gradient(to top, " ++ backgroundColor.value ++ ", " ++ backgroundColor.value ++ "), url(" ++ backgroundImageUrl ++ ")")
         , color Styles.palette.white
+        , textDecoration none
+        , Css.hover
+            [ fontWeight bold
+            , Css.property "background-image" ("linear-gradient(to top, " ++ hoverColor.value ++ ", " ++ hoverColor.value ++ "), url(" ++ backgroundImageUrl ++ ")")
+            ]
         ]
 
 
