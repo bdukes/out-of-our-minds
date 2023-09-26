@@ -11,7 +11,7 @@
   "devDependencies": {
     "elm-optimize-level-2": "^0.3.5",
     "elm-pages": "^2.1.12",
-    "elm-review": "^2.8.5",
+    "elm-review": "^2.10.3",
     "elm-tooling": "^1.14.0",
     "typescript": "4.7"
   }
