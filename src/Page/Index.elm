@@ -1,7 +1,7 @@
 module Page.Index exposing (Data, Model, Msg, page)
 
 import Accessibility.Styled exposing (..)
-import Css exposing (alignItems, block, bold, center, color, display, displayFlex, fontWeight, justifyContent, none, padding2, pct, spaceAround, textAlign, textDecoration, width, zero)
+import Css exposing (alignItems, block, bold, center, color, display, displayFlex, fontSize, fontWeight, justifyContent, lighter, none, normal, padding2, pct, spaceAround, textAlign, textDecoration, width, zero)
 import Css.Media as Media exposing (only, screen, withMedia)
 import DataSource exposing (DataSource)
 import Head
@@ -97,7 +97,9 @@ bannerStyle backgroundColor hoverColor backgroundImageUrl =
     Css.batch
         [ display block
         , textAlign center
-        , padding2 (Css.em 5) zero
+        , padding2 (Css.rem 5) zero
+        , fontSize (Css.em 2)
+        , fontWeight lighter
         , width (pct 100)
         , Css.backgroundSize Css.cover
         , Css.backgroundRepeat Css.noRepeat
@@ -106,7 +108,7 @@ bannerStyle backgroundColor hoverColor backgroundImageUrl =
         , color Styles.palette.white
         , textDecoration none
         , Css.hover
-            [ fontWeight bold
+            [ fontWeight normal
             , Css.property "background-image" ("linear-gradient(to top, " ++ hoverColor.value ++ ", " ++ hoverColor.value ++ "), url(" ++ backgroundImageUrl ++ ")")
             ]
         ]
