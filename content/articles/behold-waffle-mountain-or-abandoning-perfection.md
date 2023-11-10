@@ -3,7 +3,7 @@
   "author": "Nikki Dukes",
   "title": "Behold, Waffle Mountain! Or, Abandoning Perfection",
   "description": "Life is not often picture perfect, but good enough is good enough. How we embrace broken waffles and reframe our mistakes.",
-  "image": "v1603304397/article-covers/portion-sizes-for-sweet-drinks",
+  "image": "/images/articles/behold-waffle-mountain-or-abandoning-perfection/IMG_20210603_170334918_HDR.jpg",
   "published": "2021-09-25",
   "categories": ["nutrition", "nurture"],
   "tags":

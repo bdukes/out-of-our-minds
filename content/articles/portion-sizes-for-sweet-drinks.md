@@ -3,7 +3,7 @@
   "author": "Nikki Dukes",
   "title": "Portion Sizes for Sweet Drinks",
   "description": "Learn about a variety of techniques for portioning juices and other sweet drinks in order to meet everyone's physical needs",
-  "image": "v1603304397/article-covers/portion-sizes-for-sweet-drinks",
+  "image": "/images/articles/portion-sizes-for-sweet-drinks/IMG_20210925_135155068~2.jpg",
   "published": "2021-09-25",
   "categories": ["nutrition", "trauma"],
 }

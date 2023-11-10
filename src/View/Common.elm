@@ -3,7 +3,7 @@ module View.Common exposing (articleList, body, categoryImageLink, categoryList,
 import Accessibility.Styled as Html exposing (..)
 import Article exposing (ArticleMetadata)
 import Category exposing (Category)
-import Css exposing (auto, backgroundColor, center, color, fontFamilies, margin2, maxWidth, sansSerif, textAlign, width, zero)
+import Css exposing (auto, center, color, fontFamilies, margin2, maxWidth, sansSerif, textAlign, width, zero)
 import Css.Media as Media exposing (only, screen, withMedia)
 import Html.Styled.Attributes as Attr exposing (css, src, title)
 import Route exposing (Route)
@@ -14,7 +14,6 @@ mainStyle : Css.Style
 mainStyle =
     Css.batch
         [ fontFamilies [ Css.qt "Open Sans", .value sansSerif ]
-        , backgroundColor Styles.palette.white
         , color Styles.palette.black
         , margin2 zero auto
         , width (Css.pct 100)

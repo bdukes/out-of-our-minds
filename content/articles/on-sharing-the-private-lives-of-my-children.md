@@ -3,7 +3,7 @@
   "author": "Nikki Dukes",
   "title": "On Sharing the Private Lives of My Children",
   "description": "Read a reflection on the intentional care that goes into sharing potentially embarassing or hurtful details of our lives online",
-  "image": "v1603304397/article-covers/on-sharing-the-private-lives-of-my-children",
+  "image": "/images/articles/on-sharing-the-private-lives-of-my-children/signatures.jpg",
   "published": "2021-08-28",
   "categories": ["nurture", "trauma"],
 }

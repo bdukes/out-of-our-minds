@@ -1,14 +1,13 @@
 module Article exposing (ArticleMetadata, allMetadata, articlesGlob, frontmatterDecoder)
 
 import Category exposing (Category)
-import Cloudinary
 import DataSource
 import DataSource.File as File
 import DataSource.Glob as Glob
 import Date exposing (Date)
 import List.Extra
 import OptimizedDecoder
-import Pages.Url exposing (Url)
+import Pages.Url as Url exposing (Url)
 import Route
 
 
@@ -105,7 +104,7 @@ categoryDecoder categories =
 imageDecoder : OptimizedDecoder.Decoder Url
 imageDecoder =
     OptimizedDecoder.string
-        |> OptimizedDecoder.map (\cloudinaryAsset -> Cloudinary.url cloudinaryAsset Nothing 800)
+        |> OptimizedDecoder.map Url.external
 
 
 dateDecoder : OptimizedDecoder.Decoder Date

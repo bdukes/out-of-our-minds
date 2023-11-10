@@ -2,7 +2,7 @@ module Page.Article.Slug_ exposing (Data, Model, Msg, page)
 
 import Accessibility.Styled exposing (..)
 import Article exposing (ArticleMetadata)
-import Css
+import Css exposing (cover, noRepeat)
 import Css.Global
 import Css.Media as Media exposing (only, screen, withMedia)
 import DataSource exposing (DataSource)
@@ -13,10 +13,12 @@ import Html.Styled.Attributes exposing (css)
 import MarkdownCodec
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
+import Pages.Url as Url
 import Path
 import Shared
 import Site
 import StructuredData
+import Styles exposing (palette)
 import View exposing (View)
 import View.Common
 
@@ -119,13 +121,17 @@ view _ _ static =
             header
                 [ css
                     [ withMedia [ only screen [ Media.minWidth (Css.px 960) ] ]
-                        [ Css.displayFlex
-                        , Css.justifyContent Css.spaceBetween
+                        [ Css.property "background-image" ("linear-gradient(to top, rgba(255, 255, 255, 0.9), rgba(0, 0, 0, 0.6)), url(" ++ Url.toString static.data.metadata.image ++ ")")
+                        , Css.backgroundRepeat noRepeat
+                        , Css.backgroundSize cover
+                        , Css.backgroundPosition2 Css.zero (Css.pct 25)
+                        , Css.color palette.white
+                        , Css.padding2 (Css.rem 2) (Css.rem 1)
                         ]
                     ]
                 ]
                 [ View.Common.pageHeading [] [ text static.data.metadata.title ]
-                , View.Common.categoryList [] static.data.metadata.categories
+                , View.Common.categoryList [ css [ Css.flexDirection Css.rowReverse ] ] static.data.metadata.categories
                 ]
 
         contentStyles =

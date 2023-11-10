@@ -13,6 +13,7 @@ import Pages.PageUrl exposing (PageUrl)
 import Path exposing (Path)
 import Route exposing (Route)
 import SharedTemplate exposing (SharedTemplate)
+import Styles exposing (palette)
 import View exposing (View)
 
 
@@ -92,6 +93,7 @@ view _ _ _ _ pageView =
         div
             [ css
                 [ Css.minHeight (Css.vh 100)
+                , Css.backgroundColor palette.white
                 , Css.property "display" "grid"
                 , Css.property "gap" "0.5em"
                 , Css.property "grid-template-areas"
