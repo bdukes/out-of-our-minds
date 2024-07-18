@@ -1,4 +1,4 @@
-module Shared exposing (Data, Model, Msg, SharedMsg, template)
+module Shared exposing (Data, Model, Msg, template)
 
 import Accessibility.Styled exposing (div)
 import BackendTask exposing (BackendTask)
@@ -8,7 +8,6 @@ import Css.Global exposing (descendants, everything)
 import Effect exposing (Effect)
 import FatalError exposing (FatalError)
 import Html exposing (Html)
-import Html.Events
 import Html.Styled.Attributes exposing (css)
 import Pages.Flags
 import Pages.PageUrl exposing (PageUrl)
@@ -36,10 +35,6 @@ type alias Msg =
 
 type alias Data =
     { categories : List Category }
-
-
-type alias SharedMsg =
-    Never
 
 
 type alias Model =

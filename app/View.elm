@@ -6,7 +6,7 @@ module View exposing (View, map)
 
 -}
 
-import Accessibility.Styled exposing (Html, text)
+import Accessibility.Styled exposing (Html)
 
 
 {-| -}

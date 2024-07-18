@@ -1,24 +1,18 @@
 module Route.Articles exposing (ActionData, Data, Model, Msg, route)
 
-import Accessibility.Styled as Html exposing (img, section, text)
+import Accessibility.Styled exposing (text)
 import Article
 import BackendTask exposing (BackendTask)
-import Css exposing (alignItems, block, center, color, display, displayFlex, fontSize, fontWeight, justifyContent, lighter, none, normal, padding2, pct, spaceAround, textAlign, textDecoration, width, zero)
-import Css.Media as Media exposing (only, screen, withMedia)
 import FatalError exposing (FatalError)
 import Head
 import Head.Seo as Seo
-import Html.Styled.Attributes exposing (css, src)
-import Pages.Url
 import PagesMsg exposing (PagesMsg)
 import Route exposing (Route)
 import RouteBuilder exposing (App, StatelessRoute)
 import Shared
 import Site
-import Styles
-import UrlPath
 import View exposing (View)
-import View.Common exposing (categoryImageLink, link)
+import View.Common
 
 
 type alias Model =
@@ -82,53 +76,3 @@ view app shared =
                 :: View.Common.articleList app.data
             )
     }
-
-
-bannersStyle : Css.Style
-bannersStyle =
-    withMedia [ only screen [ Media.minWidth (Css.px 450) ] ]
-        [ displayFlex
-        , justifyContent spaceAround
-        , alignItems center
-        ]
-
-
-bannerStyle : Css.Color -> Css.Color -> String -> Css.Style
-bannerStyle backgroundColor hoverColor backgroundImageUrl =
-    Css.batch
-        [ display block
-        , textAlign center
-        , padding2 (Css.rem 5) zero
-        , fontSize (Css.em 2)
-        , fontWeight lighter
-        , width (pct 100)
-        , Css.backgroundSize Css.cover
-        , Css.backgroundRepeat Css.noRepeat
-        , Css.backgroundPosition Css.center
-        , Css.property "background-image" ("linear-gradient(to top, " ++ backgroundColor.value ++ ", " ++ backgroundColor.value ++ "), url(" ++ backgroundImageUrl ++ ")")
-        , color Styles.palette.white
-        , textDecoration none
-        , Css.hover
-            [ fontWeight normal
-            , Css.property "background-image" ("linear-gradient(to top, " ++ hoverColor.value ++ ", " ++ hoverColor.value ++ "), url(" ++ backgroundImageUrl ++ ")")
-            ]
-        ]
-
-
-logoNavStyles : Css.Style
-logoNavStyles =
-    Css.batch
-        [ Css.margin2 (Css.em 2) zero
-        , Css.property "display" "grid"
-        , Css.property "gap" "1em"
-        , Css.property "grid-template-columns" " 1fr"
-        , withMedia [ only screen [ Media.minWidth (Css.px 300), Media.maxWidth (Css.px 449) ] ]
-            [ Css.property "grid-template-columns" "repeat(2, 1fr)"
-            ]
-        , withMedia [ only screen [ Media.minWidth (Css.px 450), Media.maxWidth (Css.px 959) ] ]
-            [ Css.property "grid-template-columns" "repeat(3, 1fr)"
-            ]
-        , withMedia [ only screen [ Media.minWidth (Css.px 960) ] ]
-            [ Css.property "grid-template-columns" "repeat(6, 1fr)"
-            ]
-        ]

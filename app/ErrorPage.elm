@@ -1,8 +1,7 @@
-module ErrorPage exposing (ErrorPage(..), Model, Msg, head, init, internalError, notFound, statusCode, update, view)
+module ErrorPage exposing (ErrorPage(..), Model, Msg, init, internalError, notFound, statusCode, update, view)
 
-import Accessibility.Styled as Html exposing (Html)
+import Accessibility.Styled as Html
 import Effect exposing (Effect)
-import Head
 import View exposing (View)
 
 
@@ -25,11 +24,6 @@ init errorPage =
 update : ErrorPage -> Msg -> Model -> ( Model, Effect Msg )
 update errorPage msg model =
     ( model, Effect.none )
-
-
-head : ErrorPage -> List Head.Tag
-head errorPage =
-    []
 
 
 type ErrorPage
@@ -67,7 +61,7 @@ view error model =
             NotFound ->
                 "Page Not Found"
 
-            InternalError string ->
+            InternalError _ ->
                 "Unexpected Error"
     }
 
