@@ -1,16 +1,17 @@
-module Page.Articles.Category_ exposing (Data, Model, Msg, page)
+module Route.Articles.Category_ exposing (ActionData, Data, Model, Msg, route)
 
-import Accessibility.Styled exposing (..)
+import Accessibility.Styled as Html exposing (text)
 import Article exposing (ArticleMetadata)
+import BackendTask exposing (BackendTask)
 import Category exposing (Category)
-import DataSource exposing (DataSource)
+import FatalError exposing (FatalError)
 import Head
 import Head.Seo as Seo
 import List.Extra
-import Page exposing (Page, StaticPayload)
-import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
+import PagesMsg exposing (PagesMsg)
 import Route exposing (Route)
+import RouteBuilder exposing (App, StatelessRoute)
 import Shared
 import Site
 import View exposing (View)
@@ -18,35 +19,45 @@ import View.Common
 
 
 type alias Model =
-    ()
+    {}
 
 
 type alias Msg =
-    Never
+    ()
 
 
 type alias RouteParams =
     { category : String }
 
 
-page : Page RouteParams Data
-page =
-    Page.prerender
+route : StatelessRoute RouteParams Data ActionData
+route =
+    RouteBuilder.preRender
         { head = head
-        , routes = routes
+        , pages = pages
         , data = data
         }
-        |> Page.buildNoState { view = view }
+        |> RouteBuilder.buildNoState { view = view }
 
 
-routes : DataSource (List RouteParams)
-routes =
+pages : BackendTask FatalError (List RouteParams)
+pages =
     Category.dataSource
-        |> DataSource.map (List.map .name)
-        |> DataSource.map (List.map RouteParams)
+        |> BackendTask.map (List.map .name)
+        |> BackendTask.map (List.map RouteParams)
 
 
-data : RouteParams -> DataSource Data
+type alias Data =
+    { articles : List ( Route, ArticleMetadata )
+    , category : Category
+    }
+
+
+type alias ActionData =
+    {}
+
+
+data : RouteParams -> BackendTask FatalError Data
 data routeParams =
     let
         filterArticlesByCategory : List ( Route, ArticleMetadata ) -> List ( Route, ArticleMetadata )
@@ -65,26 +76,26 @@ data routeParams =
 
         categoryDataSource =
             Category.dataSource
-                |> DataSource.map (List.Extra.find isMatchingCategory)
-                |> DataSource.map (Maybe.map DataSource.succeed)
-                |> DataSource.andThen (Maybe.withDefault (DataSource.fail "No matching category"))
+                |> BackendTask.map (List.Extra.find isMatchingCategory)
+                |> BackendTask.map (Maybe.map BackendTask.succeed)
+                |> BackendTask.andThen (Maybe.withDefault (BackendTask.fail (FatalError.fromString "No matching category")))
 
         articlesDataSource =
             Article.allMetadata
-                |> DataSource.map filterArticlesByCategory
+                |> BackendTask.map filterArticlesByCategory
     in
-    DataSource.map2 Data
+    BackendTask.map2 Data
         articlesDataSource
         categoryDataSource
 
 
 head :
-    StaticPayload Data RouteParams
+    App Data ActionData RouteParams
     -> List Head.Tag
-head static =
+head app =
     let
         category =
-            static.data.category
+            app.data.category
     in
     Seo.summary
         { canonicalUrlOverride = Nothing
@@ -102,22 +113,15 @@ head static =
         |> Seo.website
 
 
-type alias Data =
-    { articles : List ( Route, ArticleMetadata )
-    , category : Category
-    }
-
-
 view :
-    Maybe PageUrl
+    App Data ActionData RouteParams
     -> Shared.Model
-    -> StaticPayload Data RouteParams
-    -> View Msg
-view _ _ static =
-    { title = static.data.category.name
+    -> View (PagesMsg Msg)
+view app sharedModel =
+    { title = app.data.category.name
     , body =
         View.Common.body
-            (View.Common.pageHeading [] [ text ("Articles about " ++ static.data.category.name) ]
-                :: View.Common.articleList static.data.articles
+            (View.Common.pageHeading [] [ text ("Articles about " ++ app.data.category.name) ]
+                :: View.Common.articleList app.data.articles
             )
     }

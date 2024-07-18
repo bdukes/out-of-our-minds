@@ -1,50 +1,30 @@
 module Site exposing (config, siteLogo, siteName, siteTagline)
 
-import DataSource
+import BackendTask exposing (BackendTask)
+import FatalError exposing (FatalError)
 import Head
 import Head.Seo exposing (Image)
 import MimeType
-import Pages.Manifest as Manifest
 import Pages.Url
-import Route
 import SiteConfig exposing (SiteConfig)
 
 
-type alias Data =
-    ()
-
-
-config : SiteConfig Data
+config : SiteConfig
 config =
-    { data = data
-    , canonicalUrl = "https://out-of-our-minds.family"
-    , manifest = manifest
+    { canonicalUrl = "https://out-of-our-minds.xyz"
     , head = head
     }
 
 
-data : DataSource.DataSource Data
-data =
-    DataSource.succeed ()
-
-
-head : Data -> List Head.Tag
-head _ =
-    [ Head.sitemapLink "/sitemap.xml"
+head : BackendTask FatalError (List Head.Tag)
+head =
+    [ Head.metaName "viewport" (Head.raw "width=device-width,initial-scale=1")
+    , Head.sitemapLink "/sitemap.xml"
     , Head.rssLink "/articles/feed.xml"
     , Head.icon [] (MimeType.OtherImage "svg+xml") (Pages.Url.external "/images/favicon.svg")
     , Head.icon [ ( 48, 48 ) ] MimeType.Png (Pages.Url.external "/images/favicon.png")
     ]
-
-
-manifest : Data -> Manifest.Config
-manifest _ =
-    Manifest.init
-        { name = siteName
-        , description = siteTagline
-        , startUrl = Route.Index |> Route.toPath
-        , icons = []
-        }
+        |> BackendTask.succeed
 
 
 siteName : String

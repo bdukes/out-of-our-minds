@@ -1,85 +1,86 @@
-module Page.Index exposing (Data, Model, Msg, page)
+module Route.Articles exposing (ActionData, Data, Model, Msg, route)
 
-import Accessibility.Styled exposing (..)
+import Accessibility.Styled as Html exposing (img, section, text)
+import Article
+import BackendTask exposing (BackendTask)
 import Css exposing (alignItems, block, center, color, display, displayFlex, fontSize, fontWeight, justifyContent, lighter, none, normal, padding2, pct, spaceAround, textAlign, textDecoration, width, zero)
 import Css.Media as Media exposing (only, screen, withMedia)
-import DataSource exposing (DataSource)
+import FatalError exposing (FatalError)
 import Head
 import Head.Seo as Seo
 import Html.Styled.Attributes exposing (css, src)
-import Page exposing (Page, StaticPayload)
-import Pages.PageUrl exposing (PageUrl)
-import Route
+import Pages.Url
+import PagesMsg exposing (PagesMsg)
+import Route exposing (Route)
+import RouteBuilder exposing (App, StatelessRoute)
 import Shared
 import Site
 import Styles
+import UrlPath
 import View exposing (View)
 import View.Common exposing (categoryImageLink, link)
 
 
 type alias Model =
-    ()
+    {}
 
 
 type alias Msg =
-    Never
+    ()
 
 
 type alias RouteParams =
     {}
 
 
-page : Page RouteParams Data
-page =
-    Page.single
+type alias Data =
+    List ( Route, Article.ArticleMetadata )
+
+
+type alias ActionData =
+    {}
+
+
+route : StatelessRoute RouteParams Data ActionData
+route =
+    RouteBuilder.single
         { head = head
         , data = data
         }
-        |> Page.buildNoState { view = view }
+        |> RouteBuilder.buildNoState { view = view }
 
 
-data : DataSource Data
+data : BackendTask FatalError Data
 data =
-    DataSource.succeed ()
+    Article.allMetadata
 
 
 head :
-    StaticPayload Data RouteParams
+    App Data ActionData RouteParams
     -> List Head.Tag
-head _ =
+head app =
     Seo.summary
         { canonicalUrlOverride = Nothing
         , siteName = Site.siteName
         , image = Site.siteLogo
-        , description = Site.siteTagline
+        , description = "Our collection of articles on topics like education, nurture, sensory needs, trauma and more"
         , locale = Nothing
-        , title = "Out of Our Minds"
+        , title = "Articles | Out of Our Minds"
         }
         |> Seo.website
 
 
-type alias Data =
-    ()
-
-
 view :
-    Maybe PageUrl
+    App Data ActionData RouteParams
     -> Shared.Model
-    -> StaticPayload Data RouteParams
-    -> View Msg
-view _ _ static =
+    -> View (PagesMsg Msg)
+view app shared =
     { title = "Out of Our Minds"
     , body =
         View.Common.body
-            [ section [ css [ Css.marginBottom (Css.em 2) ] ]
-                [ img "Creative resources bringing order to chaos for families" [ css [ width (pct 100), padding2 zero (Css.em 2) ], src "/images/tagline.svg" ]
-                ]
-            , section [ css [ bannersStyle ] ]
-                [ link Route.Articles [ css [ bannerStyle Styles.palette.primaryTransparent Styles.palette.primarySemiTransparent "/images/bg-paper.jpg" ] ] [ text "Articles" ]
-                , link Route.Store [ css [ bannerStyle Styles.palette.secondaryTransparent Styles.palette.secondarySemiTransparent "/images/bg-books.jpg" ] ] [ text "Store" ]
-                ]
-            , section [ css [ logoNavStyles ] ] (List.map categoryImageLink static.sharedData.categories)
-            ]
+            (View.Common.pageHeading [] [ text "All articles" ]
+                :: View.Common.articleList app.data
+            )
     }
 
 
