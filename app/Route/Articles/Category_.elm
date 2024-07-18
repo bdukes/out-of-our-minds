@@ -1,6 +1,6 @@
 module Route.Articles.Category_ exposing (ActionData, Data, Model, Msg, route)
 
-import Accessibility.Styled as Html exposing (text)
+import Accessibility.Styled exposing (text)
 import Article exposing (ArticleMetadata)
 import BackendTask exposing (BackendTask)
 import Category exposing (Category)

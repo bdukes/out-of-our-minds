@@ -1,6 +1,6 @@
 module Route.Index exposing (ActionData, Data, Model, Msg, route)
 
-import Accessibility.Styled as Html exposing (img, section, text)
+import Accessibility.Styled exposing (img, section, text)
 import BackendTask exposing (BackendTask)
 import Css exposing (alignItems, block, center, color, display, displayFlex, fontSize, fontWeight, justifyContent, lighter, none, normal, padding2, pct, spaceAround, textAlign, textDecoration, width, zero)
 import Css.Media as Media exposing (only, screen, withMedia)
@@ -8,14 +8,12 @@ import FatalError exposing (FatalError)
 import Head
 import Head.Seo as Seo
 import Html.Styled.Attributes exposing (css, src)
-import Pages.Url
 import PagesMsg exposing (PagesMsg)
 import Route
 import RouteBuilder exposing (App, StatelessRoute)
 import Shared
 import Site
 import Styles
-import UrlPath
 import View exposing (View)
 import View.Common exposing (categoryImageLink, link)
 
