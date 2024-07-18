@@ -5,8 +5,8 @@ import Effect exposing (Effect)
 import View exposing (View)
 
 
-type Msg
-    = Never
+type alias Msg =
+    Never
 
 
 type alias Model =
@@ -15,14 +15,14 @@ type alias Model =
 
 
 init : ErrorPage -> ( Model, Effect Msg )
-init errorPage =
+init _ =
     ( { count = 0 }
     , Effect.none
     )
 
 
 update : ErrorPage -> Msg -> Model -> ( Model, Effect Msg )
-update errorPage msg model =
+update _ _ model =
     ( model, Effect.none )
 
 
@@ -42,7 +42,7 @@ internalError =
 
 
 view : ErrorPage -> Model -> View Msg
-view error model =
+view error _ =
     { body =
         [ Html.div []
             [ Html.p []
