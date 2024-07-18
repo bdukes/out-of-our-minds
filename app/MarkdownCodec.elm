@@ -1,9 +1,10 @@
 module MarkdownCodec exposing (withFrontmatter)
 
 import Article exposing (ArticleMetadata, frontmatterDecoder)
+import BackendTask exposing (BackendTask)
+import BackendTask.File as StaticFile
 import Category
-import DataSource exposing (DataSource)
-import DataSource.File as StaticFile
+import FatalError exposing (FatalError)
 import Html.Styled exposing (Html)
 import Markdown.Block as Block exposing (Block)
 import Markdown.Parser
@@ -15,39 +16,44 @@ import Serialize as S
 withFrontmatter :
     (ArticleMetadata -> List (Html msg) -> value)
     -> String
-    -> DataSource value
+    -> BackendTask FatalError value
 withFrontmatter constructor filePath =
     let
+        frontmatterDataSource : BackendTask FatalError ArticleMetadata
         frontmatterDataSource =
             Category.dataSource
-                |> DataSource.andThen
+                |> BackendTask.andThen
                     (\categories ->
                         StaticFile.onlyFrontmatter
                             (frontmatterDecoder categories)
                             filePath
+                            |> BackendTask.allowFatal
                     )
+
+        markdownToBlocks : String -> BackendTask FatalError (List Block)
+        markdownToBlocks rawBody =
+            rawBody
+                |> Markdown.Parser.parse
+                |> Result.mapError (\_ -> FatalError.fromString "Couldn't parse markdown.")
+                |> BackendTask.fromResult
+
+        blocksToHtml : List Block -> BackendTask FatalError (List (Html msg))
+        blocksToHtml blocks =
+            blocks
+                |> Markdown.Renderer.render MarkdownRenderer.renderer
+                |> Result.mapError (\err -> FatalError.fromString err)
+                |> BackendTask.fromResult
+
+        bodyDataSource : BackendTask FatalError (List (Html msg))
+        bodyDataSource =
+            StaticFile.bodyWithoutFrontmatter filePath
+                |> BackendTask.allowFatal
+                |> BackendTask.andThen markdownToBlocks
+                |> BackendTask.andThen blocksToHtml
     in
-    DataSource.map2 constructor
+    BackendTask.map2 constructor
         frontmatterDataSource
-        ((StaticFile.bodyWithoutFrontmatter
-            filePath
-            |> DataSource.andThen
-                (\rawBody ->
-                    rawBody
-                        |> Markdown.Parser.parse
-                        |> Result.mapError (\_ -> "Couldn't parse markdown.")
-                        |> DataSource.fromResult
-                )
-         )
-            |> DataSource.distillSerializeCodec ("markdown-blocks-" ++ filePath)
-                (S.list codec)
-            |> DataSource.andThen
-                (\blocks ->
-                    blocks
-                        |> Markdown.Renderer.render MarkdownRenderer.renderer
-                        |> DataSource.fromResult
-                )
-        )
+        bodyDataSource
 
 
 codec : S.Codec Never Block

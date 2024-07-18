@@ -1,54 +1,56 @@
-module Page.Article.Slug_ exposing (Data, Model, Msg, page)
+module Route.Article.Slug_ exposing (ActionData, Data, Model, Msg, route)
 
 import Accessibility.Styled exposing (..)
 import Article exposing (ArticleMetadata)
+import BackendTask exposing (BackendTask)
 import Css exposing (cover, noRepeat)
 import Css.Global
 import Css.Media as Media exposing (only, screen, withMedia)
-import DataSource exposing (DataSource)
 import Date
+import DateOrDateTime
+import FatalError exposing (FatalError)
 import Head
 import Head.Seo as Seo
 import Html.Styled.Attributes exposing (css)
 import MarkdownCodec
-import Page exposing (Page, StaticPayload)
-import Pages.PageUrl exposing (PageUrl)
 import Pages.Url as Url
-import Path
+import PagesMsg exposing (PagesMsg)
+import RouteBuilder exposing (App, StatelessRoute)
 import Shared
 import Site
 import StructuredData
 import Styles exposing (palette)
+import UrlPath
 import View exposing (View)
 import View.Common
 
 
 type alias Model =
-    ()
+    {}
 
 
 type alias Msg =
-    Never
+    ()
 
 
 type alias RouteParams =
     { slug : String }
 
 
-page : Page RouteParams Data
-page =
-    Page.prerender
+route : StatelessRoute RouteParams Data ActionData
+route =
+    RouteBuilder.preRender
         { head = head
-        , routes = routes
+        , pages = pages
         , data = data
         }
-        |> Page.buildNoState { view = view }
+        |> RouteBuilder.buildNoState { view = view }
 
 
-routes : DataSource (List RouteParams)
-routes =
+pages : BackendTask FatalError (List RouteParams)
+pages =
     Article.articlesGlob
-        |> DataSource.map
+        |> BackendTask.map
             (List.map
                 (\globData ->
                     { slug = globData.slug }
@@ -56,19 +58,29 @@ routes =
             )
 
 
-data : RouteParams -> DataSource Data
-data route =
+type alias Data =
+    { metadata : ArticleMetadata
+    , body : List (Html (PagesMsg Msg))
+    }
+
+
+type alias ActionData =
+    {}
+
+
+data : RouteParams -> BackendTask FatalError Data
+data routeParams =
     MarkdownCodec.withFrontmatter (\metadata body -> Data metadata body)
-        ("content/articles/" ++ route.slug ++ ".md")
+        ("content/articles/" ++ routeParams.slug ++ ".md")
 
 
 head :
-    StaticPayload Data RouteParams
+    App Data ActionData RouteParams
     -> List Head.Tag
-head static =
+head app =
     let
         metadata =
-            static.data.metadata
+            app.data.metadata
     in
     Head.structuredData
         (StructuredData.article
@@ -76,7 +88,7 @@ head static =
             , description = metadata.description
             , author = StructuredData.person { name = metadata.author }
             , publisher = StructuredData.person { name = metadata.author }
-            , url = Site.config.canonicalUrl ++ Path.toAbsolute static.path
+            , url = Site.config.canonicalUrl ++ UrlPath.toAbsolute app.path
             , imageUrl = metadata.image
             , datePublished = Date.toIsoString metadata.published
             }
@@ -97,31 +109,24 @@ head static =
                 |> Seo.article
                     { tags = List.map .name metadata.categories
                     , section = Nothing
-                    , publishedTime = Just (Date.toIsoString metadata.published)
+                    , publishedTime = Just (DateOrDateTime.Date metadata.published)
                     , modifiedTime = Nothing
                     , expirationTime = Nothing
                     }
            )
 
 
-type alias Data =
-    { metadata : ArticleMetadata
-    , body : List (Html Msg)
-    }
-
-
 view :
-    Maybe PageUrl
+    App Data ActionData RouteParams
     -> Shared.Model
-    -> StaticPayload Data RouteParams
-    -> View Msg
-view _ _ static =
+    -> View (PagesMsg Msg)
+view app sharedModel =
     let
         articleHeader =
             header
                 [ css
                     [ withMedia [ only screen [ Media.minWidth (Css.px 960) ] ]
-                        [ Css.property "background-image" ("linear-gradient(to top, rgba(255, 255, 255, 0.9), rgba(0, 0, 0, 0.6)), url(" ++ Url.toString static.data.metadata.image ++ ")")
+                        [ Css.property "background-image" ("linear-gradient(to top, rgba(255, 255, 255, 0.9), rgba(0, 0, 0, 0.6)), url(" ++ Url.toString app.data.metadata.image ++ ")")
                         , Css.backgroundRepeat noRepeat
                         , Css.backgroundSize cover
                         , Css.backgroundPosition2 Css.zero (Css.pct 25)
@@ -130,8 +135,8 @@ view _ _ static =
                         ]
                     ]
                 ]
-                [ View.Common.pageHeading [] [ text static.data.metadata.title ]
-                , View.Common.categoryList [ css [ Css.flexDirection Css.rowReverse ] ] static.data.metadata.categories
+                [ View.Common.pageHeading [] [ text app.data.metadata.title ]
+                , View.Common.categoryList [ css [ Css.flexDirection Css.rowReverse ] ] app.data.metadata.categories
                 ]
 
         contentStyles =
@@ -151,10 +156,10 @@ view _ _ static =
                     ]
                 ]
     in
-    { title = static.data.metadata.title
+    { title = app.data.metadata.title
     , body =
         View.Common.body
             [ article [ css [ contentStyles ] ]
-                (articleHeader :: static.data.body)
+                (articleHeader :: app.data.body)
             ]
     }

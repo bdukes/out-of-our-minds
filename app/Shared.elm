@@ -1,19 +1,21 @@
-module Shared exposing (Data, Model, Msg, template)
+module Shared exposing (Data, Model, Msg, SharedMsg, template)
 
 import Accessibility.Styled exposing (div)
-import Browser.Navigation
+import BackendTask exposing (BackendTask)
 import Category exposing (Category)
 import Css exposing (borderBox, boxSizing, margin, zero)
 import Css.Global exposing (descendants, everything)
-import DataSource
+import Effect exposing (Effect)
+import FatalError exposing (FatalError)
 import Html exposing (Html)
+import Html.Events
 import Html.Styled.Attributes exposing (css)
 import Pages.Flags
 import Pages.PageUrl exposing (PageUrl)
-import Path exposing (Path)
 import Route exposing (Route)
 import SharedTemplate exposing (SharedTemplate)
 import Styles exposing (palette)
+import UrlPath exposing (UrlPath)
 import View exposing (View)
 
 
@@ -33,64 +35,64 @@ type alias Msg =
 
 
 type alias Data =
-    { categories : List Category
-    }
+    { categories : List Category }
+
+
+type alias SharedMsg =
+    Never
 
 
 type alias Model =
-    { showMobileMenu : Bool
-    }
+    ()
 
 
 init :
-    Maybe Browser.Navigation.Key
-    -> Pages.Flags.Flags
+    Pages.Flags.Flags
     ->
         Maybe
             { path :
-                { path : Path
+                { path : UrlPath
                 , query : Maybe String
                 , fragment : Maybe String
                 }
             , metadata : route
             , pageUrl : Maybe PageUrl
             }
-    -> ( Model, Cmd Msg )
-init _ _ _ =
-    ( { showMobileMenu = False }
-    , Cmd.none
+    -> ( Model, Effect Msg )
+init flags maybePagePath =
+    ( ()
+    , Effect.none
     )
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> ( Model, Effect Msg )
 update _ model =
-    ( { model | showMobileMenu = False }, Cmd.none )
+    ( model, Effect.none )
 
 
-subscriptions : Path -> Model -> Sub Msg
+subscriptions : UrlPath -> Model -> Sub Msg
 subscriptions _ _ =
     Sub.none
 
 
-data : DataSource.DataSource Data
+data : BackendTask FatalError Data
 data =
-    DataSource.map Data Category.dataSource
+    BackendTask.map Data Category.dataSource
 
 
 view :
     Data
     ->
-        { path : Path
+        { path : UrlPath
         , route : Maybe Route
         }
     -> Model
     -> (Msg -> msg)
     -> View msg
-    -> { body : Html msg, title : String }
-view _ _ _ _ pageView =
-    { title = pageView.title
-    , body =
-        div
+    -> { body : List (Html msg), title : String }
+view sharedData page model toMsg pageView =
+    { body =
+        [ div
             [ css
                 [ Css.minHeight (Css.vh 100)
                 , Css.backgroundColor palette.white
@@ -98,14 +100,16 @@ view _ _ _ _ pageView =
                 , Css.property "gap" "0.5em"
                 , Css.property "grid-template-areas"
                     """
-                    "header"
-                    "main"
-                    "footer"
-                    """
+                              "header"
+                              "main"
+                              "footer"
+                              """
                 ]
             ]
             (bodyStyles :: pageView.body)
             |> Accessibility.Styled.toUnstyled
+        ]
+    , title = pageView.title
     }
 
 
