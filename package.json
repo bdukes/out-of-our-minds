@@ -9,7 +9,7 @@
     "fix": "elm-review --fix"
   },
   "devDependencies": {
-    "elm-codegen": "^0.6.0",
+    "elm-codegen": "^0.6.1",
     "elm-optimize-level-2": "^0.3.5",
     "elm-pages": "^3.0.14",
     "elm-review": "^2.12.0",
