@@ -15,7 +15,7 @@
     "elm-review": "^2.13.4",
     "elm-tooling": "^1.16.0",
     "lamdera": "^0.19.1-1.2.1-1",
-    "vite": "^7.1.5"
+    "vite": "^7.1.6"
   },
   "dependencies": {
     "@netlify/functions": "^4.2.5"
