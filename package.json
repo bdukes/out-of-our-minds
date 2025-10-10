@@ -18,6 +18,6 @@
     "vite": "^7.1.9"
   },
   "dependencies": {
-    "@netlify/functions": "^4.2.7"
+    "@netlify/functions": "^4.3.0"
   }
 }
