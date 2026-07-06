@@ -13,7 +13,7 @@
     "elm-optimize-level-2": "^0.4.0",
     "elm-pages": "^3.0.27",
     "elm-review": "^2.13.5",
-    "elm-tooling": "^1.17.0",
+    "elm-tooling": "^1.18.0",
     "lamdera": "^0.19.1-1.2.1-1",
     "vite": "^8.1.2"
   },
